@@ -1,30 +1,33 @@
 import streamlit as st
 import pandas as pd
 
-# Load database
-df = pd.read_csv("foods.csv")
-
-st.set_page_config(page_title="Perhitungan Nilai Gizi", layout="centered")
-
+# Judul aplikasi
 st.title("Perhitungan Nilai Gizi Berdasarkan Bahan Pangan")
 
+# Load data dari CSV
+@st.cache_data
+def load_data():
+    return pd.read_csv("database_gizi.csv")
+
+data = load_data()
+
 # Pilih bahan pangan
-bahan = st.selectbox("Pilih Bahan Pangan", df["nama"])
-jumlah = st.number_input("Masukkan jumlah (gram)", min_value=1.0, value=100.0, step=10.0)
+bahan_pilihan = st.selectbox("Pilih Bahan Pangan:", data["Bahan"].tolist())
 
-# Ambil data dari database
-data_bahan = df[df["nama"] == bahan].iloc[0]
+# Input jumlah dalam gram
+jumlah = st.number_input("Masukkan jumlah (dalam gram):", min_value=1.0, step=1.0)
 
-# Hitung nilai gizi per jumlah yang dimasukkan
-kalori = data_bahan["kalori"] * jumlah / 100
-protein = data_bahan["protein"] * jumlah / 100
-lemak = data_bahan["lemak"] * jumlah / 100
-karbo = data_bahan["karbohidrat"] * jumlah / 100
+# Tombol hitung
+if st.button("Hitung Nilai Gizi"):
+    info = data[data["Bahan"] == bahan_pilihan].iloc[0]
+    faktor = jumlah / 100
+    kalori = info["Kalori"] * faktor
+    protein = info["Protein"] * faktor
+    lemak = info["Lemak"] * faktor
+    karbo = info["Karbohidrat"] * faktor
 
-# Tampilkan hasil
-st.subheader("Hasil Perhitungan")
-st.write(f"**{bahan.capitalize()} ({jumlah} gram)**")
-st.write(f"- Kalori: **{kalori:.2f}** kkal")
-st.write(f"- Protein: **{protein:.2f}** gram")
-st.write(f"- Lemak: **{lemak:.2f}** gram")
-st.write(f"- Karbohidrat: **{karbo:.2f}** gram")
+    st.subheader(f"Hasil Perhitungan untuk {jumlah}g {bahan_pilihan}")
+    st.write(f"*Kalori:* {kalori:.2f} kkal")
+    st.write(f"*Protein:* {protein:.2f} g")
+    st.write(f"*Lemak:* {lemak:.2f} g")
+    st.write(f"*Karbohidrat:* {karbo:.2f} g")
