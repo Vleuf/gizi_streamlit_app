@@ -1,6 +1,6 @@
-﻿Bahan;Kalori;Protein;Lemak;Karbohidrat
-Nasi;175;"3,2";"0,3";39
-Telur;155;13;11;"1,1"
-Tempe;193;"20,8";11;8
-Tahu;80;"8,5";"4,7";"1,6"
-Ayam;239;27;14;0
+Bahan,Kalori,Protein,Lemak,Karbohidrat
+Nasi,175,3.2,0.3,39
+Telur,155,13,11,1.1
+Tempe,193,20.8,11,8
+Tahu,80,8.5,4.7,1.6
+Ayam,239,27,14,0
