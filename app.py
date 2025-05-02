@@ -11,7 +11,7 @@ def load_data():
 
 data = load_data()
 # Sidebar for navigation
-page = st.sidebar.radio("Pilih Halaman", ["Perhitungan Nilai Gizi", "Database Pangan"])
+page = st.sidebar.radio()
 # Perhitungan Nilai Gizi
 if page == "Perhitungan Nilai Gizi":
     st.title("Perhitungan Nilai Gizi Berdasarkan Bahan Pangan")
