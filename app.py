@@ -10,7 +10,8 @@ def load_data():
     return pd.read_csv("database_gizi.csv")
 
 data = load_data()
-
+# Sidebar for navigation
+page = st.sidebar.radio("Pilih Halaman", ["Perhitungan Nilai Gizi", "Database Pangan"])
 # Perhitungan Nilai Gizi
 if page == "Perhitungan Nilai Gizi":
     st.title("Perhitungan Nilai Gizi Berdasarkan Bahan Pangan")
