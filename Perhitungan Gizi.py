@@ -1,9 +1,12 @@
 import streamlit as st
 import pandas as pd
 
+# Konfigurasi halaman
 st.set_page_config(page_title="Perhitungan Nilai Gizi", layout="wide")
-st.sidebar.image("sidebar.jpg", width=150, caption="Logo Aplikasi")
-st.image("test.jpg", use_column_width=True)
+
+# Tampilkan gambar di sidebar dan di halaman utama
+st.sidebar.image("sidebar.jpg", width=150, caption="Gambar Sidebar")
+st.image("test.jpg", use_column_width=True, caption="Perhitungan Nilai Gizi Berdasarkan Bahan Pangan")
 
 # Load CSV
 @st.cache_data
@@ -20,7 +23,7 @@ if "bahan_count" not in st.session_state:
 if "bahan_inputs" not in st.session_state:
     st.session_state.bahan_inputs = [{} for _ in range(st.session_state.bahan_count)]
 
-# Tombol untuk tambah bahan
+# Tombol untuk tambah/hapus bahan
 col_add, col_remove = st.columns([1, 1])
 with col_add:
     if st.button("➕ Tambah Bahan"):
