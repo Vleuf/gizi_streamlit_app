@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(page_title="Perhitungan Nilai Gizi", layout="wide")
+st.sidebar.image("sidebar.jpg", width=150, caption="Logo Aplikasi")
+st.image("test.jpg", use_column_width=True)
 
 # Load CSV
 @st.cache_data
