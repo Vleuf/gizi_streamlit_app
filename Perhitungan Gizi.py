@@ -4,9 +4,33 @@ import pandas as pd
 # Konfigurasi halaman
 st.set_page_config(page_title="Perhitungan Nilai Gizi", layout="wide")
 
-# Tampilkan gambar di sidebar dan di halaman utama
-st.sidebar.image("sidebar.jpg", width=150, caption="Gambar Sidebar")
-st.image("test.jpg", use_column_width=True, caption="Perhitungan Nilai Gizi Berdasarkan Bahan Pangan")
+# CSS untuk background halaman utama dan sidebar
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-image: url("test.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }}
+
+    [data-testid="stSidebar"] > div:first-child {{
+        background-image: url("sidebar.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }}
+
+    .block-container {{
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 2rem;
+        border-radius: 10px;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Load CSV
 @st.cache_data
