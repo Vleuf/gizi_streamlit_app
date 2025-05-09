@@ -15,7 +15,6 @@ data = load_data()
 if "page" not in st.session_state:
     st.session_state.page = "beranda"
 
-# Navigasi tombol
 if st.session_state.page == "beranda":
     st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi")
     st.markdown("""
@@ -29,8 +28,12 @@ if st.session_state.page == "beranda":
 
     ---  
     """)
-    if st.button("➡️ Mulai Perhitungan"):
-        st.session_state.page = "perhitungan"
+    st.button("➡️ Mulai Perhitungan", on_click=lambda: st.session_state.update(page="perhitungan"))
+
+elif st.session_state.page == "perhitungan":
+    st.title("Perhitungan Nilai Gizi Berdasarkan Bahan Pangan")
+
+    st.button("🔙 Kembali ke Beranda", on_click=lambda: st.session_state.update(page="beranda"))
 
 # ===================== HALAMAN PERHITUNGAN =====================
 elif st.session_state.page == "perhitungan":
