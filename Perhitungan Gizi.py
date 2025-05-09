@@ -1,8 +1,13 @@
 import streamlit as st
 import pandas as pd
 
-# Konfigurasi halaman
+# Konfigurasi
 st.set_page_config(page_title="Perhitungan Nilai Gizi", layout="wide")
+
+# Fungsi ganti halaman
+def set_page(page_name):
+    st.session_state.page = page_name
+    st.rerun()
 
 # Load data
 @st.cache_data
@@ -11,10 +16,11 @@ def load_data():
 
 data = load_data()
 
-# ===================== STATE & NAVIGASI =====================
+# Inisialisasi halaman pertama
 if "page" not in st.session_state:
     st.session_state.page = "beranda"
 
+# ===================== BERANDA =====================
 if st.session_state.page == "beranda":
     st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi")
     st.markdown("""
@@ -28,19 +34,12 @@ if st.session_state.page == "beranda":
 
     ---  
     """)
-    st.button("➡️ Mulai Perhitungan", on_click=lambda: st.session_state.update(page="perhitungan"))
+    st.button("➡️ Mulai Perhitungan", on_click=set_page, args=("perhitungan",))
 
+# ===================== PERHITUNGAN =====================
 elif st.session_state.page == "perhitungan":
     st.title("Perhitungan Nilai Gizi Berdasarkan Bahan Pangan")
-    
-# ===================== HALAMAN PERHITUNGAN =====================
-elif st.session_state.page == "perhitungan":
-    st.title("Perhitungan Nilai Gizi Berdasarkan Bahan Pangan")
-
-    # Tombol kembali
-    if st.button("🔙 Kembali ke Beranda"):
-        st.session_state.page = "beranda"
-        st.stop()
+    st.button("🔙 Kembali ke Beranda", on_click=set_page, args=("beranda",))
 
     # Inisialisasi bahan
     if "bahan_count" not in st.session_state:
