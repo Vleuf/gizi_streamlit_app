@@ -22,8 +22,23 @@ st.markdown("""
         background-repeat: no-repeat;
         color: white !important;
     }
+    .custom-button {
+        background-color: transparent;
+        color: white;
+        padding: 0.5em 1em;
+        border: 2px solid white;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 5px;
+    }
+    .custom-button:hover {
+        background-color: white;
+        color: black;
+    }
     </style>
-    """, unsafe_allow_html=True)
+""", unsafe_allow_html=True)
 
 # ==================== Halaman Beranda ====================
 if st.session_state.current_page == "beranda":
