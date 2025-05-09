@@ -23,17 +23,19 @@ st.markdown("""
         background-repeat: no-repeat;
         color: white !important;
     }
+    st.markdown("""
+    <style>
     .custom-button {
-        background-color: transparent;
+        background-color: rgba(255, 255, 255, 0.15); /* transparan keputihan */
         color: white;
         padding: 0.5em 1em;
         border: 2px solid white;
         border-radius: 5px;
-        text-align: center;
         font-size: 16px;
         cursor: pointer;
-        margin: 5px;
+        transition: 0.3s;
     }
+
     .custom-button:hover {
         background-color: white;
         color: black;
