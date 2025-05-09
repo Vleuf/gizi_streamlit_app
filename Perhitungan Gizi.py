@@ -32,9 +32,7 @@ if st.session_state.page == "beranda":
 
 elif st.session_state.page == "perhitungan":
     st.title("Perhitungan Nilai Gizi Berdasarkan Bahan Pangan")
-
-    st.button("🔙 Kembali ke Beranda", on_click=lambda: st.session_state.update(page="beranda"))
-
+    
 # ===================== HALAMAN PERHITUNGAN =====================
 elif st.session_state.page == "perhitungan":
     st.title("Perhitungan Nilai Gizi Berdasarkan Bahan Pangan")
