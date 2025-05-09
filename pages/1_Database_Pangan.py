@@ -12,6 +12,19 @@ if "current_page" not in st.session_state:
 def set_page(page):
     st.session_state.current_page = page
 
+st.markdown("""
+    <style>
+    .stApp {
+        background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+                    url('https://wallpapers.com/images/high/food-4k-tmi8md4hnk20df1u.webp');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: white !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 # ==================== Halaman Beranda ====================
 if st.session_state.current_page == "beranda":
     st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi")
