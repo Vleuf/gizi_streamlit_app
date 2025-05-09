@@ -4,16 +4,33 @@ st.set_page_config(page_title="Database Pangan")
 
 st.title("Database Bahan Pangan")
 
-st.markdown("Pilih bahan pangan untuk melihat informasi gizi:")
-
-bahan = st.selectbox(
-    "Pilih bahan pangan",
-    ["Nasi Putih", "Telur Ayam", "Tempe", "Tahu", "Daging Ayam"]
+# Pilihan menu
+menu = st.selectbox(
+    "Pilih halaman:",
+    ["Beranda", "Nasi Putih", "Telur Ayam", "Tempe", "Tahu", "Daging Ayam"]
 )
 
 st.markdown("---")
 
-if bahan == "Nasi Putih":
+# Konten berdasarkan pilihan
+if menu == "Beranda":
+    st.header("📘 Selamat Datang di Database Bahan Pangan")
+    st.markdown("""
+    Aplikasi ini berisi informasi singkat mengenai bahan pangan umum yang digunakan dalam perhitungan gizi.  
+    Silakan pilih bahan pangan dari menu di atas untuk melihat detail kandungan gizinya.
+    
+    **Daftar bahan pangan:**
+    - Nasi Putih
+    - Telur Ayam
+    - Tempe
+    - Tahu
+    - Daging Ayam
+
+    ---
+    *Catatan: Nilai gizi dapat bervariasi tergantung pada cara pengolahan dan jenis bahan pangan.*
+    """)
+
+elif menu == "Nasi Putih":
     st.header("🍚 Nasi Putih")
     st.markdown("""
     Nasi putih adalah sumber karbohidrat utama di Indonesia.  
@@ -23,7 +40,7 @@ if bahan == "Nasi Putih":
     - Sedikit protein dan lemak  
     """)
 
-elif bahan == "Telur Ayam":
+elif menu == "Telur Ayam":
     st.header("🥚 Telur Ayam")
     st.markdown("""
     Telur merupakan sumber protein hewani yang sangat baik.  
@@ -32,7 +49,7 @@ elif bahan == "Telur Ayam":
     - 13 gram protein  
     """)
 
-elif bahan == "Tempe":
+elif menu == "Tempe":
     st.header("🍱 Tempe")
     st.markdown("""
     Tempe adalah sumber protein nabati hasil fermentasi kedelai.  
@@ -42,7 +59,7 @@ elif bahan == "Tempe":
     - Lemak sehat  
     """)
 
-elif bahan == "Tahu":
+elif menu == "Tahu":
     st.header("🍥 Tahu")
     st.markdown("""
     Tahu memiliki kandungan protein sedang dan cocok untuk makanan rendah kalori.  
@@ -51,15 +68,7 @@ elif bahan == "Tahu":
     - 8 gram protein  
     """)
 
-elif bahan == "Daging Ayam":
+elif menu == "Daging Ayam":
     st.header("🍗 Daging Ayam")
     st.markdown("""
-    Daging ayam tanpa kulit adalah sumber protein hewani tinggi.  
-    Dalam 100 gram daging ayam mengandung:
-    - 165 kkal  
-    - 31 gram protein  
-    - Lemak rendah  
-    """)
-
-st.markdown("---")
-st.caption("*Catatan: Nilai gizi dapat bervariasi tergantung pada cara pengolahan dan jenis bahan pangan.*")
+    D
