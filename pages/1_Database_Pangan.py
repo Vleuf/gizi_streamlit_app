@@ -71,4 +71,10 @@ elif menu == "Tahu":
 elif menu == "Daging Ayam":
     st.header("🍗 Daging Ayam")
     st.markdown("""
-    D
+    Daging ayam tanpa kulit adalah sumber protein hewani tinggi.  
+    Dalam 100 gram daging ayam mengandung:
+    - 165 kkal  
+    - 31 gram protein  
+    - Lemak rendah  
+    """)
+
