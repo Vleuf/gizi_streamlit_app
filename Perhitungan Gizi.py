@@ -7,7 +7,7 @@ st.set_page_config(page_title="Perhitungan Nilai Gizi", layout="wide")
 # Fungsi ganti halaman
 def set_page(page_name):
     st.session_state.page = page_name
-    st.rerun()
+    
 
 # Load data
 @st.cache_data
