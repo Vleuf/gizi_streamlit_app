@@ -4,34 +4,6 @@ import pandas as pd
 # Konfigurasi halaman
 st.set_page_config(page_title="Perhitungan Nilai Gizi", layout="wide")
 
-# CSS untuk background halaman utama dan sidebar
-st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background-image: url("test.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }}
-
-    [data-testid="stSidebar"] > div:first-child {{
-        background-image: url("sidebar.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-    }}
-
-    .block-container {{
-        background-color: rgba(255, 255, 255, 0.8);
-        padding: 2rem;
-        border-radius: 10px;
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 # Load CSV
 @st.cache_data
 def load_data():
