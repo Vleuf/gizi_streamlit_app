@@ -4,9 +4,6 @@ import pandas as pd
 # Konfigurasi halaman
 st.set_page_config(page_title="Perhitungan Nilai Gizi", layout="wide")
 
-# Navigasi halaman
-menu = st.selectbox("Pilih Halaman", ["Beranda", "Perhitungan Nilai Gizi"])
-
 # Load data
 @st.cache_data
 def load_data():
@@ -14,8 +11,12 @@ def load_data():
 
 data = load_data()
 
-# ------------------ HALAMAN BERANDA ------------------
-if menu == "Beranda":
+# ===================== STATE & NAVIGASI =====================
+if "page" not in st.session_state:
+    st.session_state.page = "beranda"
+
+# Navigasi tombol
+if st.session_state.page == "beranda":
     st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi")
     st.markdown("""
     Aplikasi ini membantu Anda menghitung total nilai gizi dari berbagai bahan pangan berdasarkan berat (gram) yang dimasukkan.
@@ -27,20 +28,26 @@ if menu == "Beranda":
     - Lihat detail per bahan
 
     ---  
-    👉 Silakan pilih **"Perhitungan Nilai Gizi"** dari menu di atas untuk memulai perhitungan.
     """)
+    if st.button("➡️ Mulai Perhitungan"):
+        st.session_state.page = "perhitungan"
 
-# ------------------ HALAMAN PERHITUNGAN ------------------
-elif menu == "Perhitungan Nilai Gizi":
+# ===================== HALAMAN PERHITUNGAN =====================
+elif st.session_state.page == "perhitungan":
     st.title("Perhitungan Nilai Gizi Berdasarkan Bahan Pangan")
 
-    # Inisialisasi session_state
+    # Tombol kembali
+    if st.button("🔙 Kembali ke Beranda"):
+        st.session_state.page = "beranda"
+        st.stop()
+
+    # Inisialisasi bahan
     if "bahan_count" not in st.session_state:
         st.session_state.bahan_count = 1
     if "bahan_inputs" not in st.session_state:
         st.session_state.bahan_inputs = [{} for _ in range(st.session_state.bahan_count)]
 
-    # Tombol untuk tambah/hapus bahan
+    # Tombol tambah/hapus
     col_add, col_remove = st.columns([1, 1])
     with col_add:
         if st.button("➕ Tambah Bahan"):
