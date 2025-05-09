@@ -27,9 +27,6 @@ if st.session_state.current_page == "beranda":
     with col1:
         st.button("📑 Database Bahan Pangan", on_click=set_page, args=("database",))
     
-    with col2:
-        st.button("💡 Perhitungan Nilai Gizi", on_click=set_page, args=("perhitungan",))
-
 # ==================== Halaman Database Bahan Pangan ====================
 elif st.session_state.current_page == "database":
     st.title("📋 Database Bahan Pangan")
