@@ -6,13 +6,12 @@ st.set_page_config(page_title="Aplikasi Gizi", layout="wide")
 
 # ==================== Inisialisasi session_state ====================
 if "current_page" not in st.session_state:
-    st.session_state.current_page = "beranda"
+    st.session_state.current_page = "beranda"  # Default halaman beranda
 
 # Fungsi untuk mengatur halaman aktif
 def set_page(page):
     st.session_state.current_page = page
 
-# ==================== Styling ====================
 st.markdown("""
     <style>
     .stApp {
@@ -23,58 +22,37 @@ st.markdown("""
         background-repeat: no-repeat;
         color: white !important;
     }
-    .custom-button {
-        background-color: transparent;
-        color: black;
-        padding: 0.5em 1em;
-        border: 2px solid white;
-        border-radius: 5px;
-        text-align: center;
-        font-size: 16px;
-        cursor: pointer;
-        margin: 5px;
-    }
-    .custom-button:hover {
-        background-color: white;
-        color: black;
-    }
     </style>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 # ==================== Halaman Beranda ====================
 if st.session_state.current_page == "beranda":
     st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi")
     st.markdown("""
     Aplikasi ini membantu Anda untuk menghitung nilai gizi dari berbagai bahan pangan berdasarkan berat yang dimasukkan.
-
+    
     Pilih salah satu menu di bawah ini untuk melanjutkan:
-    """, unsafe_allow_html=True)
-
-    # Tombol kustom menggunakan HTML
-    col1, _ = st.columns([1, 3])
+    """)
+    
+    # Tombol untuk navigasi ke halaman lain
+    col1, col2 = st.columns(2)
+    
     with col1:
-        st.markdown(f"""
-            <button class="custom-button" onclick="window.location.reload(); window.parent.postMessage({{ type: 'streamlit:setComponentValue', key: 'current_page', value: 'database' }}, '*')">
-                📑 Database Bahan Pangan
-            </button>
-        """, unsafe_allow_html=True)
-
-        # Fallback button if HTML button doesn't work
-        if st.button("📑 Klik jika tombol atas tidak bekerja", key="fallback_db"):
-            set_page("database")
-
+        st.button("📑 Database Bahan Pangan", on_click=set_page, args=("database",))
+    
 # ==================== Halaman Database Bahan Pangan ====================
 elif st.session_state.current_page == "database":
     st.title("📋 Database Bahan Pangan")
-
-    if st.button("🔙 Kembali ke Beranda"):
-        set_page("beranda")
-
+    
+    # Tombol kembali ke Beranda
+    st.button("🔙 Kembali ke Beranda", on_click=set_page, args=("beranda",))
+    
+    # Pilihan bahan pangan
     menu = st.selectbox(
         "Pilih bahan pangan untuk melihat detail kandungan gizinya:",
         ["", "Nasi Putih", "Telur Ayam", "Tempe", "Tahu", "Daging Ayam"]
     )
-
+    
     if menu == "Nasi Putih":
         st.header("🍚 Nasi Putih")
         st.markdown("""
