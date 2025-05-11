@@ -3,16 +3,18 @@ import streamlit as st
 # Konfigurasi halaman
 st.set_page_config(page_title="Aplikasi Gizi", layout="wide")
 
-# Inisialisasi session_state
+# Inisialisasi session state
 if "current_page" not in st.session_state:
     st.session_state.current_page = "beranda"
 
-# Fungsi navigasi instan (langsung pindah halaman 1 klik)
-def set_page(page):
-    st.session_state.current_page = page
-    st.experimental_rerun()
+# Fungsi navigasi
+def go_to_database():
+    st.session_state.current_page = "database"
 
-# CSS styling: latar, tombol transparan, label putih
+def go_to_home():
+    st.session_state.current_page = "beranda"
+
+# CSS Styling
 st.markdown("""
     <style>
     .stApp {
@@ -49,24 +51,18 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# ==================== Halaman Beranda ====================
+# ==================== HALAMAN BERANDA ====================
 if st.session_state.current_page == "beranda":
     st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi")
-    st.markdown("""
-    Aplikasi ini membantu Anda menghitung nilai gizi dari berbagai bahan makanan umum.  
-    Pilih menu di bawah untuk melanjutkan:
-    """)
+    st.markdown("Aplikasi ini membantu Anda menghitung nilai gizi dari berbagai bahan makanan.")
 
-    # Tombol menuju ke database
-    if st.button("📑 Buka Database Bahan Pangan"):
-        set_page("database")
+    # Navigasi ke database dengan 1 klik (tanpa error)
+    st.button("📑 Buka Database Bahan Pangan", on_click=go_to_database)
 
-# ==================== Halaman Database ====================
+# ==================== HALAMAN DATABASE ====================
 elif st.session_state.current_page == "database":
     st.title("📋 Database Bahan Pangan")
-
-    if st.button("🔙 Kembali ke Beranda"):
-        set_page("beranda")
+    st.button("🔙 Kembali ke Beranda", on_click=go_to_home)
 
     menu = st.selectbox(
         "Pilih bahan pangan:",
@@ -77,7 +73,6 @@ elif st.session_state.current_page == "database":
         ]
     )
 
-    # Data gizi
     data_gizi = {
         "Nasi Putih": {"kalori": 175, "karbohidrat": 39, "protein": 3, "lemak": 0.3},
         "Telur Ayam": {"kalori": 155, "protein": 13, "lemak": 11, "karbohidrat": 1.1},
