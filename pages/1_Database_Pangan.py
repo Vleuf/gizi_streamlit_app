@@ -19,7 +19,7 @@ st.markdown("""
     <style>
     .stApp {
         background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                    url('https://wallpapers.com/images/high/food-4k-tmi8md4hnk20df1u.webp');
+                    url('https://images.pexels.com/photos/5463890/pexels-photo-5463890.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
