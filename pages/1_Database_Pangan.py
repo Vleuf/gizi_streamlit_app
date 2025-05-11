@@ -1,18 +1,17 @@
 import streamlit as st
-import pandas as pd
 
-# ==================== Konfigurasi Halaman ====================
+# Konfigurasi halaman
 st.set_page_config(page_title="Aplikasi Gizi", layout="wide")
 
-# ==================== Inisialisasi session_state ====================
+# Inisialisasi session_state
 if "current_page" not in st.session_state:
-    st.session_state.current_page = "beranda"  # Default halaman beranda
+    st.session_state.current_page = "beranda"
 
-# ==================== Fungsi untuk Navigasi ====================
+# Fungsi navigasi
 def set_page(page):
     st.session_state.current_page = page
 
-# ==================== CSS Kustom ====================
+# CSS transparan dan latar belakang
 st.markdown("""
     <style>
     .stApp {
@@ -24,19 +23,19 @@ st.markdown("""
         color: white !important;
     }
 
-    /* Gaya tombol transparan */
-    div[data-testid="baseButton-secondary"] button {
+    .transparent-button {
         background-color: rgba(255, 255, 255, 0.1);
         color: white;
         border: 2px solid white;
-        border-radius: 5px;
         padding: 0.5em 1em;
         font-size: 16px;
-        cursor: pointer;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        margin: 10px 5px;
     }
 
-    /* Hover efek */
-    div[data-testid="baseButton-secondary"] button:hover {
+    .transparent-button:hover {
         background-color: rgba(255, 255, 255, 0.3);
         color: black;
     }
@@ -48,70 +47,52 @@ if st.session_state.current_page == "beranda":
     st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi")
     st.markdown("""
     Aplikasi ini membantu Anda untuk menghitung nilai gizi dari berbagai bahan pangan berdasarkan berat yang dimasukkan.
-    
-    Pilih salah satu menu di bawah ini untuk melanjutkan:
     """)
 
-    # Tombol navigasi ke halaman database
     col1, col2 = st.columns(2)
+
     with col1:
-        st.button("📑 Database Bahan Pangan", on_click=set_page, args=("database",))
+        if st.markdown('<a class="transparent-button" href="#" onclick="window.location.reload(); document.dispatchEvent(new CustomEvent(\'setDatabasePage\'));">📑 Database Bahan Pangan</a>', unsafe_allow_html=True):
+            pass
     with col2:
-        st.button("📦 Fitur Lain (Coming Soon)")
+        st.markdown('<a class="transparent-button" href="#">📦 Fitur Lain (Coming Soon)</a>', unsafe_allow_html=True)
+
+    # Event listener untuk navigasi ke halaman database (pakai JS + Python bridge)
+    st.markdown("""
+        <script>
+        document.addEventListener("setDatabasePage", function() {
+            fetch("/_stcore/update_session", {
+                method: "POST",
+                body: JSON.stringify({"current_page": "database"}),
+                headers: { "Content-Type": "application/json" }
+            }).then(() => {
+                window.location.reload();
+            });
+        });
+        </script>
+    """, unsafe_allow_html=True)
 
 # ==================== Halaman Database Bahan Pangan ====================
 elif st.session_state.current_page == "database":
     st.title("📋 Database Bahan Pangan")
+    if st.button("🔙 Kembali ke Beranda"):
+        set_page("beranda")
 
-    # Tombol kembali ke beranda
-    st.button("🔙 Kembali ke Beranda", on_click=set_page, args=("beranda",))
-
-    # Dropdown pilihan bahan pangan
-    menu = st.selectbox(
-        "Pilih bahan pangan untuk melihat detail kandungan gizinya:",
-        ["", "Nasi Putih", "Telur Ayam", "Tempe", "Tahu", "Daging Ayam"]
-    )
+    menu = st.selectbox("Pilih bahan pangan:", ["", "Nasi Putih", "Telur Ayam", "Tempe", "Tahu", "Daging Ayam"])
 
     if menu == "Nasi Putih":
-        st.header("🍚 Nasi Putih")
-        st.markdown("""
-        Nasi putih adalah sumber karbohidrat utama di Indonesia.  
-        Dalam 100 gram, nasi mengandung sekitar:
-        - 175 kkal  
-        - 39 gram karbohidrat  
-        - Sedikit protein dan lemak  
-        """)
+        st.subheader("🍚 Nasi Putih")
+        st.markdown("Dalam 100 gram: 175 kkal, 39g karbohidrat.")
     elif menu == "Telur Ayam":
-        st.header("🥚 Telur Ayam")
-        st.markdown("""
-        Telur merupakan sumber protein hewani yang sangat baik.  
-        Dalam 100 gram telur mengandung sekitar:
-        - 155 kkal  
-        - 13 gram protein  
-        """)
+        st.subheader("🥚 Telur Ayam")
+        st.markdown("Dalam 100 gram: 155 kkal, 13g protein.")
     elif menu == "Tempe":
-        st.header("🍱 Tempe")
-        st.markdown("""
-        Tempe adalah sumber protein nabati hasil fermentasi kedelai.  
-        Dalam 100 gram tempe mengandung:
-        - 193 kkal  
-        - 19 gram protein  
-        - Lemak sehat  
-        """)
+        st.subheader("🍱 Tempe")
+        st.markdown("Dalam 100 gram: 193 kkal, 19g protein.")
     elif menu == "Tahu":
-        st.header("🍥 Tahu")
-        st.markdown("""
-        Tahu memiliki kandungan protein sedang dan cocok untuk makanan rendah kalori.  
-        Dalam 100 gram tahu mengandung:
-        - 80 kkal  
-        - 8 gram protein  
-        """)
+        st.subheader("🍥 Tahu")
+        st.markdown("Dalam 100 gram: 80 kkal, 8g protein.")
     elif menu == "Daging Ayam":
-        st.header("🍗 Daging Ayam")
-        st.markdown("""
-        Daging ayam tanpa kulit adalah sumber protein hewani tinggi.  
-        Dalam 100 gram daging ayam mengandung:
-        - 165 kkal  
-        - 31 gram protein  
-        - Lemak rendah  
-        """)
+        st.subheader("🍗 Daging Ayam")
+        st.markdown("Dalam 100 gram: 165 kkal, 31g protein.")
+
