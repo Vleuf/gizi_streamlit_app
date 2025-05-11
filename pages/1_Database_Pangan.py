@@ -24,7 +24,7 @@ st.markdown("""
     }
     .custom-button {
         background-color: black;
-        color: black;
+        color: white;
         padding: 0.5em 1em;
         border: 2px solid white;
         border-radius: 5px;
