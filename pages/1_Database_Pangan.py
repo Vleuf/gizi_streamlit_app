@@ -18,7 +18,7 @@ def go_to_home():
 st.markdown("""
     <style>
     .stApp {
-        background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)),
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
                     url('https://wallpapers.com/images/high/food-4k-tmi8md4hnk20df1u.webp');
         background-size: cover;
         background-position: center;
