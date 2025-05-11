@@ -53,7 +53,7 @@ st.markdown("""
 
 # ==================== HALAMAN BERANDA ====================
 if st.session_state.current_page == "beranda":
-    st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi")
+    st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi Dan Database Pangan")
     st.markdown("Aplikasi ini membantu Anda menghitung nilai gizi dari berbagai bahan makanan.")
 
     # Navigasi ke database dengan 1 klik (tanpa error)
