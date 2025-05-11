@@ -23,7 +23,7 @@ st.markdown("""
         color: white !important;
     }
     .custom-button {
-        background-color: rgba(255,255,0.15);
+        background-color: black;
         color: black;
         padding: 0.5em 1em;
         border: 2px solid white;
