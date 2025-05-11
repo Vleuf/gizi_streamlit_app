@@ -1,17 +1,18 @@
 import streamlit as st
 import pandas as pd
 
-# Konfigurasi halaman
+# ==================== Konfigurasi Halaman ====================
 st.set_page_config(page_title="Aplikasi Gizi", layout="wide")
 
 # ==================== Inisialisasi session_state ====================
 if "current_page" not in st.session_state:
     st.session_state.current_page = "beranda"  # Default halaman beranda
 
-# Fungsi untuk mengatur halaman aktif
+# ==================== Fungsi untuk Navigasi ====================
 def set_page(page):
     st.session_state.current_page = page
 
+# ==================== CSS Kustom ====================
 st.markdown("""
     <style>
     .stApp {
@@ -22,19 +23,21 @@ st.markdown("""
         background-repeat: no-repeat;
         color: white !important;
     }
-    .custom-button {
-        background-color: black;
+
+    /* Gaya tombol transparan */
+    div[data-testid="baseButton-secondary"] button {
+        background-color: rgba(255, 255, 255, 0.1);
         color: white;
-        padding: 0.5em 1em;
         border: 2px solid white;
         border-radius: 5px;
-        text-align: center;
+        padding: 0.5em 1em;
         font-size: 16px;
         cursor: pointer;
-        margin: 5px;
     }
-    .custom-button:hover {
-        background-color: #FFFFFF;
+
+    /* Hover efek */
+    div[data-testid="baseButton-secondary"] button:hover {
+        background-color: rgba(255, 255, 255, 0.3);
         color: black;
     }
     </style>
@@ -48,26 +51,27 @@ if st.session_state.current_page == "beranda":
     
     Pilih salah satu menu di bawah ini untuk melanjutkan:
     """)
-    
-    # Tombol untuk navigasi ke halaman lain
+
+    # Tombol navigasi ke halaman database
     col1, col2 = st.columns(2)
-    
     with col1:
         st.button("📑 Database Bahan Pangan", on_click=set_page, args=("database",))
-    
+    with col2:
+        st.button("📦 Fitur Lain (Coming Soon)")
+
 # ==================== Halaman Database Bahan Pangan ====================
 elif st.session_state.current_page == "database":
     st.title("📋 Database Bahan Pangan")
-    
-    # Tombol kembali ke Beranda
+
+    # Tombol kembali ke beranda
     st.button("🔙 Kembali ke Beranda", on_click=set_page, args=("beranda",))
-    
-    # Pilihan bahan pangan
+
+    # Dropdown pilihan bahan pangan
     menu = st.selectbox(
         "Pilih bahan pangan untuk melihat detail kandungan gizinya:",
         ["", "Nasi Putih", "Telur Ayam", "Tempe", "Tahu", "Daging Ayam"]
     )
-    
+
     if menu == "Nasi Putih":
         st.header("🍚 Nasi Putih")
         st.markdown("""
