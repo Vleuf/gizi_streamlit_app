@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 
 # Konfigurasi
 st.set_page_config(page_title="Perhitungan Nilai Gizi", layout="wide")
@@ -96,29 +95,11 @@ elif st.session_state.page == "perhitungan":
                     "Karbohidrat": row["Karbohidrat"] * faktor,
                 })
 
-        # Tampilkan total gizi
         st.subheader("Total Nilai Gizi:")
         for k, v in total.items():
             st.write(f"*{k}:* {v:.2f}")
 
         if hasil_detail:
             st.subheader("Detail Per Bahan:")
-            st.dataframe(pd.DataFrame(hasil_detail))
+            st.dataframe(pd.DataFrame(hasil_detail)) 
 
-        # ===================== Tampilkan Grafik =====================
-        # Membuat grafik perbandingan gizi
-        st.subheader("Perbandingan Nilai Gizi")
-        
-        labels = total.keys()
-        values = list(total.values())
-
-        # Membuat grafik batang
-        fig, ax = plt.subplots()
-        ax.bar(labels, values, color=['blue', 'green', 'red', 'orange'])
-
-        ax.set_xlabel('Jenis Gizi')
-        ax.set_ylabel('Jumlah (gram/kcal)')
-        ax.set_title('Perbandingan Nilai Gizi Total')
-
-        # Menampilkan grafik pada streamlit
-        st.pyplot(fig)
