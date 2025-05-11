@@ -11,7 +11,7 @@ if "current_page" not in st.session_state:
 def set_page(page):
     st.session_state.current_page = page
 
-# CSS transparan dan latar belakang
+# CSS styling tombol transparan dan latar belakang
 st.markdown("""
     <style>
     .stApp {
@@ -23,21 +23,26 @@ st.markdown("""
         color: white !important;
     }
 
-    .transparent-button {
-        background-color: rgba(255, 255, 255, 0.1);
-        color: white;
-        border: 2px solid white;
-        padding: 0.5em 1em;
-        font-size: 16px;
-        border-radius: 5px;
-        text-decoration: none;
-        display: inline-block;
-        margin: 10px 5px;
+    /* Styling tombol transparan */
+    button[kind="secondary"] {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        color: white !important;
+        border: 2px solid white !important;
+        border-radius: 5px !important;
+        padding: 0.5em 1em !important;
+        font-size: 16px !important;
     }
 
-    .transparent-button:hover {
-        background-color: rgba(255, 255, 255, 0.3);
-        color: black;
+    /* Hover effect */
+    button[kind="secondary"]:hover {
+        background-color: rgba(255, 255, 255, 0.3) !important;
+        color: black !important;
+    }
+
+    /* Hilangkan garis biru saat tombol diklik */
+    button:focus {
+        outline: none !important;
+        box-shadow: none !important;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -50,31 +55,16 @@ if st.session_state.current_page == "beranda":
     """)
 
     col1, col2 = st.columns(2)
-
     with col1:
-        if st.markdown('<a class="transparent-button" href="#" onclick="window.location.reload(); document.dispatchEvent(new CustomEvent(\'setDatabasePage\'));">📑 Database Bahan Pangan</a>', unsafe_allow_html=True):
-            pass
+        if st.button("📑 Database Bahan Pangan"):
+            set_page("database")
     with col2:
-        st.markdown('<a class="transparent-button" href="#">📦 Fitur Lain (Coming Soon)</a>', unsafe_allow_html=True)
+        st.button("📦 Fitur Lain (Coming Soon)")
 
-    # Event listener untuk navigasi ke halaman database (pakai JS + Python bridge)
-    st.markdown("""
-        <script>
-        document.addEventListener("setDatabasePage", function() {
-            fetch("/_stcore/update_session", {
-                method: "POST",
-                body: JSON.stringify({"current_page": "database"}),
-                headers: { "Content-Type": "application/json" }
-            }).then(() => {
-                window.location.reload();
-            });
-        });
-        </script>
-    """, unsafe_allow_html=True)
-
-# ==================== Halaman Database Bahan Pangan ====================
+# ==================== Halaman Database ====================
 elif st.session_state.current_page == "database":
     st.title("📋 Database Bahan Pangan")
+
     if st.button("🔙 Kembali ke Beranda"):
         set_page("beranda")
 
@@ -95,4 +85,3 @@ elif st.session_state.current_page == "database":
     elif menu == "Daging Ayam":
         st.subheader("🍗 Daging Ayam")
         st.markdown("Dalam 100 gram: 165 kkal, 31g protein.")
-
