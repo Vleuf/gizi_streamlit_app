@@ -34,7 +34,7 @@ st.markdown("""
         margin: 5px;
     }
     .custom-button:hover {
-        background-color: black;
+        background-color: #FFFFFF;
         color: black;
     }
     </style>
