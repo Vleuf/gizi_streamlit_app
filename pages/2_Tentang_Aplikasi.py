@@ -3,7 +3,7 @@ import streamlit as st
 # Konfigurasi halaman
 st.set_page_config(page_title="Selamat Datang", layout="wide")
 
-# Styling untuk halaman pembuka
+# Styling konsisten
 st.markdown("""
     <style>
     .stApp {
@@ -12,45 +12,46 @@ st.markdown("""
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        color: white;
+        color: white !important;
+    }
+
+    .title-text {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 10px;
     }
 
     .intro-text {
-        font-size: 24px;
-        font-weight: 300;
+        font-size: 20px;
         line-height: 1.6;
         margin-bottom: 20px;
     }
 
-    .title-text {
-        font-size: 38px;
-        font-weight: bold;
-        margin-bottom: 10px;
+    ul {
+        margin-top: 0.5em;
+    }
+
+    li {
+        margin-bottom: 0.5em;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# ==================== HALAMAN PERKENALAN ====================
-st.markdown('<p class="title-text">🌿 Aplikasi Perhitungan Gizi dan Informasi Pangan</p>', unsafe_allow_html=True)
+# Teks Perkenalan
+st.markdown('<p class="title-text">📘 Selamat Datang di Aplikasi Perhitungan Gizi</p>', unsafe_allow_html=True)
 
 st.markdown("""
 <div class="intro-text">
-Selamat datang di aplikasi interaktif yang membantu Anda memahami kandungan gizi dari berbagai bahan makanan!  
-Aplikasi ini dirancang untuk:
+Aplikasi ini membantu Anda menghitung total nilai gizi dari berbagai bahan pangan berdasarkan berat (gram) yang dimasukkan.
+
+### Fitur:
 <ul>
-  <li>💡 Memberikan informasi gizi lengkap dari berbagai bahan pangan.</li>
-  <li>📊 Membantu menghitung total kalori, protein, lemak, dan karbohidrat berdasarkan porsi Anda.</li>
-  <li>🥗 Menyediakan database makanan populer di Indonesia secara ringkas dan mudah diakses.</li>
+  <li>✅ Pilih beberapa bahan pangan</li>
+  <li>✅ Masukkan jumlah dalam gram</li>
+  <li>✅ Dapatkan total nilai kalori, protein, lemak, dan karbohidrat</li>
+  <li>✅ Lihat detail per bahan</li>
 </ul>
-Klik tombol di bawah ini untuk mulai menjelajah!
+
+Gunakan menu navigasi atau scroll untuk melanjutkan ke fitur berikutnya.
 </div>
 """, unsafe_allow_html=True)
-
-# Tombol Navigasi
-col1, col2 = st.columns([1, 1])
-with col1:
-    if st.button("➡️ Mulai Perhitungan Gizi"):
-        st.session_state.page = "perhitungan"
-with col2:
-    if st.button("📋 Lihat Database Bahan Pangan"):
-        st.session_state.current_page = "database"
