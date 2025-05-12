@@ -20,6 +20,44 @@ data = load_data()
 if "page" not in st.session_state:
     st.session_state.page = "beranda"
 
+# CSS Styling
+st.markdown("""
+    <style>
+    .stApp {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                    url('https://images.pexels.com/photos/5463890/pexels-photo-5463890.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: white !important;
+    }
+
+    button[kind="secondary"] {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        color: white !important;
+        border: 2px solid white !important;
+        border-radius: 5px !important;
+        padding: 0.5em 1em !important;
+        font-size: 16px !important;
+    }
+
+    button[kind="secondary"]:hover {
+        background-color: rgba(255, 255, 255, 0.3) !important;
+        color: black !important;
+    }
+
+    button:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    label, .css-1cpxqw2, .css-1y4p8pa {
+        color: white !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+
 # ===================== BERANDA =====================
 if st.session_state.page == "beranda":
     st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi")
