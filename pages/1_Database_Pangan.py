@@ -77,9 +77,5 @@ elif st.session_state.current_page == "database":
             st.subheader(f"📝 {menu}")
             st.markdown(deskripsi)
 
-        # Opsional: tampilkan semua data
-        st.markdown("### 📄 Tabel Semua Bahan")
-        st.dataframe(df)
-
     except FileNotFoundError:
         st.error("❌ File CSV tidak ditemukan. Pastikan file `deskripsi_dengan_pengertian.csv` ada di direktori yang benar.")
