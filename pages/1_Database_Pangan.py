@@ -55,11 +55,12 @@ st.markdown("""
 # ==================== HALAMAN BERANDA ====================
 if st.session_state.current_page == "beranda":
     st.title("📘 Selamat Datang di Halaman Database Pangan")
-    st.markdown("Halaman ini menyediakan informasi mengenai berbagai bahan pangan, 
+    st.markdown("""
+    Halaman ini menyediakan informasi mengenai berbagai bahan pangan, 
     termasuk kandungan gizi dan deskripsi lengkapnya. 
-    Anda dapat memilih bahan pangan dari daftar untuk melihat penjelasan detail mengenai manfaat dan kandungan gizinya.")
+    Anda dapat memilih bahan pangan dari daftar untuk melihat penjelasan detail mengenai manfaat dan kandungan gizinya.
+    """)
     st.button("📑 Buka Database Bahan Pangan", on_click=go_to_database)
-
 # ==================== HALAMAN DATABASE ====================
 elif st.session_state.current_page == "database":
     st.title("📋 Database Bahan Pangan")
