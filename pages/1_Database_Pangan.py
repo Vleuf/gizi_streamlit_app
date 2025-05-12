@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Konfigurasi halaman
-st.set_page_config(page_title="Aplikasi Gizi", layout="wide")
+st.set_page_config(page_title="Database GIZI", layout="wide")
 
 # Inisialisasi session state
 if "current_page" not in st.session_state:
@@ -54,7 +54,7 @@ st.markdown("""
 
 # ==================== HALAMAN BERANDA ====================
 if st.session_state.current_page == "beranda":
-    st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi Dan Database Pangan")
+    st.title("📘 Selamat Datang di Halaman Database Pangan")
     st.markdown("Aplikasi ini membantu Anda menghitung nilai gizi dari berbagai bahan makanan.")
     st.button("📑 Buka Database Bahan Pangan", on_click=go_to_database)
 
