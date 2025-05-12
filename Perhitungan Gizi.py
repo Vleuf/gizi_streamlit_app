@@ -19,6 +19,12 @@ data = load_data()
 if "page" not in st.session_state:
     st.session_state.page = "beranda"
 
+# Inisialisasi bahan
+if "bahan_count" not in st.session_state:
+    st.session_state.bahan_count = 1
+if "bahan_inputs" not in st.session_state:
+    st.session_state.bahan_inputs = [{} for _ in range(st.session_state.bahan_count)]
+
 # CSS Styling
 st.markdown("""
     <style>
@@ -58,7 +64,7 @@ st.markdown("""
 
 # ===================== BERANDA =====================
 if st.session_state.page == "beranda":
-    st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi")
+    st.title("\U0001F4D8 Selamat Datang di Aplikasi Perhitungan Gizi")
     st.markdown("""
     Aplikasi ini membantu Anda menghitung total nilai gizi dari berbagai bahan pangan berdasarkan berat (gram) yang dimasukkan.
 
@@ -70,27 +76,21 @@ if st.session_state.page == "beranda":
 
     ---  
     """)
-    st.button("➡️ Mulai Perhitungan", on_click=set_page, args=("perhitungan",))
+    st.button("\u27a1\ufe0f Mulai Perhitungan", on_click=set_page, args=("perhitungan",))
 
 # ===================== PERHITUNGAN =====================
 elif st.session_state.page == "perhitungan":
     st.title("Perhitungan Nilai Gizi Berdasarkan Bahan Pangan")
-    st.button("🔙 Kembali ke Beranda", on_click=set_page, args=("beranda",))
-
-    # Inisialisasi bahan
-    if "bahan_count" not in st.session_state:
-        st.session_state.bahan_count = 1
-    if "bahan_inputs" not in st.session_state:
-        st.session_state.bahan_inputs = [{} for _ in range(st.session_state.bahan_count)]
+    st.button("\U0001F519 Kembali ke Beranda", on_click=set_page, args=("beranda",))
 
     # Tombol tambah/hapus
     col_add, col_remove = st.columns([1, 1])
     with col_add:
-        if st.button("➕ Tambah Bahan"):
+        if st.button("\u2795 Tambah Bahan"):
             st.session_state.bahan_count += 1
             st.session_state.bahan_inputs.append({})
     with col_remove:
-        if st.button("➖ Hapus Bahan") and st.session_state.bahan_count > 1:
+        if st.button("\u2796 Hapus Bahan") and st.session_state.bahan_count > 1:
             st.session_state.bahan_count -= 1
             st.session_state.bahan_inputs.pop()
 
