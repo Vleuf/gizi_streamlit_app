@@ -63,48 +63,23 @@ elif st.session_state.current_page == "database":
     st.title("📋 Database Bahan Pangan")
     st.button("🔙 Kembali ke Beranda", on_click=go_to_home)
 
-    menu = st.selectbox(
-        "Pilih bahan pangan:",
-        [
-            "", "Nasi Putih", "Telur Ayam", "Tempe", "Tahu", "Daging Ayam",
-            "Ikan Tuna", "Daging Sapi", "Kentang", "Wortel", "Bayam", "Apel",
-            "Pisang", "Susu Sapi", "Keju", "Yogurt"
-        ]
-    )
-
-    data_gizi = {
-        "Nasi Putih": {"kalori": 175, "karbohidrat": 39, "protein": 3, "lemak": 0.3},
-        "Telur Ayam": {"kalori": 155, "protein": 13, "lemak": 11, "karbohidrat": 1.1},
-        "Tempe": {"kalori": 193, "protein": 19, "lemak": 11, "karbohidrat": 9},
-        "Tahu": {"kalori": 80, "protein": 8, "lemak": 4, "karbohidrat": 2},
-        "Daging Ayam": {"kalori": 165, "protein": 31, "lemak": 3.6, "karbohidrat": 0},
-        "Ikan Tuna": {"kalori": 144, "protein": 30, "lemak": 1.0, "karbohidrat": 0},
-        "Daging Sapi": {"kalori": 250, "protein": 26, "lemak": 17, "karbohidrat": 0},
-        "Kentang": {"kalori": 77, "protein": 2, "lemak": 0.1, "karbohidrat": 17},
-        "Wortel": {"kalori": 41, "protein": 0.9, "lemak": 0.2, "karbohidrat": 10},
-        "Bayam": {"kalori": 23, "protein": 2.9, "lemak": 0.4, "karbohidrat": 3.6},
-        "Apel": {"kalori": 52, "protein": 0.3, "lemak": 0.2, "karbohidrat": 14},
-        "Pisang": {"kalori": 89, "protein": 1.1, "lemak": 0.3, "karbohidrat": 23},
-        "Susu Sapi": {"kalori": 61, "protein": 3.2, "lemak": 3.3, "karbohidrat": 5},
-        "Keju": {"kalori": 402, "protein": 25, "lemak": 33, "karbohidrat": 1.3},
-        "Yogurt": {"kalori": 59, "protein": 10, "lemak": 0.4, "karbohidrat": 3.6}
-    }
-
-    if menu and menu in data_gizi:
-        gizi = data_gizi[menu]
-        st.subheader(f"🍽️ {menu}")
-        st.markdown(f"""
-        Dalam 100 gram **{menu.lower()}** mengandung:
-        - **{gizi['kalori']} kkal**
-        - **{gizi['protein']} g protein**
-        - **{gizi['lemak']} g lemak**
-        - **{gizi['karbohidrat']} g karbohidrat**
-        """)
-
-    # Menampilkan isi file CSV
-    st.markdown("### 📄 Tabel Deskripsi dengan Pengertian")
+    # Baca data dari file CSV
     try:
         df = pd.read_csv("deskripsi_dengan_pengertian.csv")
+        bahan_list = [""] + df['Bahan'].dropna().unique().tolist()
+
+        # Pilihan bahan pangan
+        menu = st.selectbox("Pilih bahan pangan:", bahan_list)
+
+        # Tampilkan deskripsi jika tersedia
+        if menu:
+            deskripsi = df[df['Bahan'] == menu]['Deskripsi Lengkap'].values[0]
+            st.subheader(f"📝 {menu}")
+            st.markdown(deskripsi)
+
+        # Opsional: tampilkan semua data
+        st.markdown("### 📄 Tabel Semua Bahan")
         st.dataframe(df)
-    except Exception as e:
-        st.error(f"Gagal memuat file CSV: {e}")
+
+    except FileNotFoundError:
+        st.error("❌ File CSV tidak ditemukan. Pastikan file `deskripsi_dengan_pengertian.csv` ada di direktori yang benar.")
