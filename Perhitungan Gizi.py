@@ -7,7 +7,6 @@ st.set_page_config(page_title="Perhitungan Nilai Gizi", layout="wide")
 # Fungsi ganti halaman
 def set_page(page_name):
     st.session_state.page = page_name
-    
 
 # Load data
 @st.cache_data
@@ -57,7 +56,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-
 # ===================== BERANDA =====================
 if st.session_state.page == "beranda":
     st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi")
@@ -67,7 +65,7 @@ if st.session_state.page == "beranda":
     ### Fitur:
     - Pilih beberapa bahan pangan
     - Masukkan jumlah dalam gram
-    - Dapatkan total nilai kalori, protein, lemak, dan karbohidrat
+    - Dapatkan total nilai kalori, protein, lemak, karbohidrat, serat, kalsium, zat besi, dan vitamin C
     - Lihat detail per bahan
 
     ---  
@@ -111,7 +109,10 @@ elif st.session_state.page == "perhitungan":
 
     # Tombol hitung
     if st.button("Hitung Total Gizi"):
-        total = {"Kalori": 0, "Protein": 0, "Lemak": 0, "Karbohidrat": 0}
+        total = {
+            "Kalori": 0, "Protein": 0, "Lemak": 0, "Karbohidrat": 0,
+            "Serat": 0, "Kalsium": 0, "Zat Besi": 0, "Vitamin C": 0
+        }
         hasil_detail = []
 
         for bahan, gram in input_bahan_gram:
@@ -119,10 +120,15 @@ elif st.session_state.page == "perhitungan":
             if not matching_rows.empty and gram > 0:
                 row = matching_rows.iloc[0]
                 faktor = gram / 100
+
                 total["Kalori"] += row["Kalori"] * faktor
                 total["Protein"] += row["Protein"] * faktor
                 total["Lemak"] += row["Lemak"] * faktor
                 total["Karbohidrat"] += row["Karbohidrat"] * faktor
+                total["Serat"] += row["Serat"] * faktor
+                total["Kalsium"] += row["Kalsium"] * faktor
+                total["Zat Besi"] += row["Zat Besi"] * faktor
+                total["Vitamin C"] += row["Vitamin C"] * faktor
 
                 hasil_detail.append({
                     "Bahan": bahan,
@@ -131,13 +137,17 @@ elif st.session_state.page == "perhitungan":
                     "Protein": row["Protein"] * faktor,
                     "Lemak": row["Lemak"] * faktor,
                     "Karbohidrat": row["Karbohidrat"] * faktor,
+                    "Serat": row["Serat"] * faktor,
+                    "Kalsium": row["Kalsium"] * faktor,
+                    "Zat Besi": row["Zat Besi"] * faktor,
+                    "Vitamin C": row["Vitamin C"] * faktor,
                 })
 
         st.subheader("Total Nilai Gizi:")
         for k, v in total.items():
-            st.write(f"*{k}:* {v:.2f}")
+            satuan = "kkal" if k == "Kalori" else "g" if k in ["Protein", "Lemak", "Karbohidrat", "Serat"] else "mg"
+            st.write(f"*{k}:* {v:.2f} {satuan}")
 
         if hasil_detail:
             st.subheader("Detail Per Bahan:")
-            st.dataframe(pd.DataFrame(hasil_detail)) 
-
+            st.dataframe(pd.DataFrame(hasil_detail))
