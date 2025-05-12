@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 # Konfigurasi halaman
 st.set_page_config(page_title="Aplikasi Gizi", layout="wide")
@@ -55,8 +56,6 @@ st.markdown("""
 if st.session_state.current_page == "beranda":
     st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi Dan Database Pangan")
     st.markdown("Aplikasi ini membantu Anda menghitung nilai gizi dari berbagai bahan makanan.")
-
-    # Navigasi ke database dengan 1 klik (tanpa error)
     st.button("📑 Buka Database Bahan Pangan", on_click=go_to_database)
 
 # ==================== HALAMAN DATABASE ====================
@@ -102,3 +101,10 @@ elif st.session_state.current_page == "database":
         - **{gizi['karbohidrat']} g karbohidrat**
         """)
 
+    # Menampilkan isi file CSV
+    st.markdown("### 📄 Tabel Deskripsi dengan Pengertian")
+    try:
+        df = pd.read_csv("deskripsi_dengan_pengertian.csv")
+        st.dataframe(df)
+    except Exception as e:
+        st.error(f"Gagal memuat file CSV: {e}")
