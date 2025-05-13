@@ -29,7 +29,7 @@ st.markdown("""
 # ======== Teks Nama Pengembang ========
 st.title("👨‍💻 Tim Pengembang Aplikasi Perhitungan Gizi")
 
-st.image("kelompok.jpeg", caption="Foto Tim Pengembang", use_column_width=True)
+st.image("kelompok.jpeg", caption="Foto Tim Pengembang", use_container_width=True)
 
 st.markdown("""
 Aplikasi Perhitungan Gizi dan Database Pangan ini dikembangkan oleh tim yang berkomitmen untuk menyediakan alat yang bermanfaat bagi masyarakat, tenaga kesehatan, dan peneliti di bidang gizi. Berikut adalah nama-nama anggota tim pengembang aplikasi ini:
