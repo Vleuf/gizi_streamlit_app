@@ -15,6 +15,7 @@ def go_to_database():
 
 def go_to_home():
     st.session_state.current_page = "beranda"
+    st.balloons()  # 🎈 Efek balon saat kembali ke beranda
 
 # CSS Styling
 st.markdown("""
