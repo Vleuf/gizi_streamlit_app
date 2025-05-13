@@ -167,31 +167,35 @@ elif st.session_state.page == "perhitungan":
             saran = []
             penjelasan = []
 
-            if total["Kalori"] < 1500:
+            if total["Kalori"] < 750:
                 saran.append("- Tambahkan makanan sumber energi seperti nasi, mie, roti gandum, ubi jalar, pisang, alpukat, atau granola.")
                 penjelasan.append("Kekurangan kalori menyebabkan tubuh tidak memiliki cukup energi untuk menjalankan aktivitas harian. Gejala termasuk kelelahan, berat badan turun drastis, konsentrasi menurun, dan bisa mempengaruhi keseimbangan hormon tubuh.")
 
-            if total["Protein"] < 50:
+            if total["Protein"] < 20:
                 saran.append("- Tambahkan telur, dada ayam, tempe, tahu, ikan, daging sapi tanpa lemak, susu, yogurt, atau edamame.")
                 penjelasan.append("Kekurangan protein bisa menyebabkan kehilangan massa otot, mudah sakit, penyembuhan luka lambat, rambut rontok, dan gangguan pertumbuhan terutama pada anak-anak.")
 
-            if total["Lemak"] < 40:
+            if total["Lemak"] < 25:
                 saran.append("- Tambahkan kacang almond, kenari, minyak zaitun, biji chia, ikan salmon, atau santan.")
                 penjelasan.append("Lemak penting untuk penyerapan vitamin larut lemak (A, D, E, K), fungsi otak, dan produksi hormon. Kekurangan lemak dapat menyebabkan kulit kering, ketidakseimbangan hormon, dan gangguan pada sistem saraf.")
 
-            if total["Serat"] < 20:
+            if total["Karbohidrat"] < 112:
+                st.markdown("**Anda membutuhkan lebih banyak karbohidrat.** Karbohidrat merupakan sumber energi utama. Kekurangan karbohidrat bisa menyebabkan kelelahan, sakit kepala, sembelit, dan ketosis berlebihan.")
+                st.markdown("**Saran makanan:** nasi, roti, singkong, ubi, kentang, oatmeal, mie, jagung, pisang.")
+
+            if total["Serat"] < 11:
                 saran.append("- Tambahkan sayur seperti brokoli, bayam, wortel, serta buah seperti apel, pir, pepaya, dan biji-bijian utuh.")
                 penjelasan.append("Serat membantu pencernaan, mengontrol gula darah, dan menurunkan kolesterol. Kekurangannya bisa menyebabkan sembelit, peningkatan risiko penyakit jantung, dan gangguan metabolisme.")
 
-            if total["Kalsium"] < 800:
+            if total["Kalsium"] < 400:
                 saran.append("- Tambahkan susu, yogurt, keju, brokoli, kale, tahu, tempe, ikan sarden atau salmon bertulang.")
                 penjelasan.append("Kalsium penting untuk tulang dan gigi kuat, serta fungsi otot dan saraf. Kekurangan kalsium dapat menyebabkan osteoporosis, kram otot, dan gangguan detak jantung.")
 
-            if total["Zat Besi"] < 14:
+            if total["Zat Besi"] < 5:
                 saran.append("- Tambahkan hati ayam, daging merah, bayam, kacang merah, lentil, telur, atau sereal yang difortifikasi zat besi.")
                 penjelasan.append("Zat besi penting untuk membentuk hemoglobin. Kekurangannya menyebabkan anemia yang ditandai dengan lemas, pucat, detak jantung cepat, dan sesak napas.")
 
-            if total["Vitamin C"] < 60:
+            if total["Vitamin C"] < 25:
                 saran.append("- Tambahkan jeruk, kiwi, stroberi, mangga, jambu biji, paprika merah, atau tomat.")
                 penjelasan.append("Vitamin C penting untuk sistem imun, penyembuhan luka, dan penyerapan zat besi. Kekurangannya menyebabkan sariawan, gusi berdarah, dan skorbut (pada kasus parah).")
 
