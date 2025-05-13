@@ -11,6 +11,8 @@ if "quiz_score" not in st.session_state:
     st.session_state.quiz_score = 0
 if "quiz_submitted" not in st.session_state:
     st.session_state.quiz_submitted = False
+if "question_index" not in st.session_state:
+    st.session_state.question_index = 0
 
 # Fungsi navigasi
 def go_to_database():
@@ -54,6 +56,10 @@ st.markdown("""
     }
 
     label, .css-1cpxqw2, .css-1y4p8pa {
+        color: white !important;
+    }
+
+    .quiz-options label {
         color: white !important;
     }
     </style>
@@ -101,13 +107,6 @@ elif st.session_state.current_page == "quiz":
     st.button("🔙 Kembali ke Beranda", on_click=go_to_home)
 
     st.title("📘 Kuis Gizi & Pengetahuan Bahan Pangan")
-    st.markdown("""
-    Jawablah 15 soal berikut yang mencakup:
-    - **10 soal** tentang kandungan gizi (lemak, protein, vitamin C, zat besi, serat, karbohidrat),
-    - **5 soal** tentang pengertian atau deskripsi bahan pangan dari database.
-    
-    Pilih jawaban yang paling tepat di setiap pertanyaan!
-    """)
 
     # Soal kuis (campuran)
     questions = [
@@ -131,27 +130,22 @@ elif st.session_state.current_page == "quiz":
         {"question": "15. Anggur mengandung antioksidan penting bernama apa?", "options": ["Resveratrol", "Omega-3", "Laktosa"], "answer": "Resveratrol"},
     ]
 
-    # Form kuis
-    with st.form("kuis_gizi_pengertian"):
-        score = 0
-        user_answers = []
-
-        for i, q in enumerate(questions):
-            st.markdown(q["question"])
-            selected = st.radio(f"Jawaban Anda untuk Soal {i+1}:", q["options"], key=f"q{i}")
-            user_answers.append((selected, q["answer"]))
-            st.markdown("---")
-
-        submitted = st.form_submit_button("✅ Periksa Jawaban")
-
-        if submitted and not st.session_state.quiz_submitted:
-            for selected, correct in user_answers:
-                if selected == correct:
-                    score += 1
-            st.session_state.quiz_score = score
+    # Menampilkan soal satu per satu
+    question = questions[st.session_state.question_index]
+    
+    st.subheader(f"📝 {question['question']}")
+    options = st.radio("Pilih jawaban:", question["options"], key=f"q{st.session_state.question_index}")
+    
+    if st.button("✅ Lanjutkan"):
+        if options == question["answer"]:
+            st.session_state.quiz_score += 1
+        # Move to the next question
+        if st.session_state.question_index < len(questions) - 1:
+            st.session_state.question_index += 1
+        else:
             st.session_state.quiz_submitted = True
 
-    # Hasil akhir
+    # Setelah selesai kuis
     if st.session_state.quiz_submitted:
         st.success(f"🎯 Skor Anda: {st.session_state.quiz_score} / 15")
         if st.session_state.quiz_score == 15:
@@ -161,4 +155,5 @@ elif st.session_state.current_page == "quiz":
     def reset_quiz():
         st.session_state.quiz_score = 0
         st.session_state.quiz_submitted = False
+        st.session_state.question_index = 0
         go_to_quiz()
