@@ -21,6 +21,11 @@ def go_to_database():
     st.session_state.current_page = "database"
 
 def go_to_quiz():
+    # Reset quiz state before starting
+    st.session_state.quiz_score = 0
+    st.session_state.quiz_submitted = False
+    st.session_state.question_index = 0
+    st.session_state.user_answers = []
     st.session_state.current_page = "quiz"
 
 def go_to_home():
