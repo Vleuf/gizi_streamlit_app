@@ -27,73 +27,76 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ======== Teks Asli Perkenalan ========
-st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi")
+st.title("🧮 Aplikasi Perhitungan Gizi dan Database Pangan")
+
 st.markdown("""
-🧮 Aplikasi Perhitungan Gizi dan Database Pangan
-Aplikasi Perhitungan Gizi dan Database Pangan adalah aplikasi berbasis web yang dirancang untuk membantu pengguna menghitung kandungan gizi dari berbagai bahan pangan menggunakan basis data gizi yang tersusun secara ilmiah. Aplikasi ini tidak ditujukan untuk menghitung kebutuhan energi berdasarkan usia atau aktivitas fisik, melainkan fokus pada analisis nutrisi makanan dari bahan mentah atau olahan secara kuantitatif.
+**Aplikasi Perhitungan Gizi dan Database Pangan** adalah aplikasi berbasis web yang dirancang untuk membantu pengguna menghitung kandungan gizi dari berbagai **bahan pangan** menggunakan basis data gizi yang akurat dan terverifikasi. Aplikasi ini membantu masyarakat, pelajar, tenaga gizi, hingga peneliti untuk mengetahui kandungan nutrisi dari berbagai jenis bahan makanan secara cepat dan mudah.
 
-🎯 Tujuan Pengembangan
-Aplikasi ini dikembangkan untuk menjawab beberapa kebutuhan berikut:
+Aplikasi ini dibangun menggunakan teknologi **Streamlit**, sehingga tampilannya sederhana, responsif, dan dapat diakses langsung melalui web tanpa instalasi.
 
-Menyediakan akses cepat dan mudah ke informasi kandungan gizi dari bahan pangan.
+---
 
-Mendukung proses edukasi gizi berbasis data di berbagai level—individu, akademik, dan institusional.
+## 🎯 Tujuan Pengembangan Aplikasi
 
-Membantu tenaga gizi, peneliti, guru, dan masyarakat umum dalam perencanaan menu sehat.
+Tujuan utama dari aplikasi ini adalah:
 
-Mengintegrasikan teknologi dalam pemantauan dan pemilihan pangan yang lebih bijak.
+1. **Menyediakan akses mudah terhadap data gizi pangan**
+   - Banyak masyarakat dan tenaga kesehatan yang membutuhkan data cepat mengenai nilai gizi bahan makanan.
+   - Aplikasi ini menjawab kebutuhan tersebut secara praktis.
 
-🧩 Fitur-Fitur Utama
-1. 🔍 Pencarian Bahan Pangan
-Pengguna dapat mencari berbagai jenis bahan pangan, seperti sayur, buah, daging, dan lainnya, dari daftar database yang tersedia.
+2. **Meningkatkan literasi gizi berbasis data**
+   - Digunakan sebagai sarana edukasi dalam memahami nilai gizi dari makanan sehari-hari.
 
-2. 🧮 Perhitungan Kandungan Gizi Otomatis
-Setelah memilih bahan pangan, pengguna cukup memasukkan jumlah dalam gram, dan aplikasi akan menampilkan:
+3. **Mendukung program intervensi gizi dan ketahanan pangan**
+   - Dapat digunakan oleh lembaga pendidikan, LSM, dan pemerhati gizi untuk merancang menu dan program pangan.
 
-Kalori (kkal)
+---
 
-Protein (gram)
+## 🔍 Fitur Utama
 
-Lemak (gram)
+Beberapa fitur unggulan aplikasi ini antara lain:
 
-Karbohidrat (gram)
+### 📦 1. Pencarian Bahan Pangan
+   Pengguna dapat memasukkan nama bahan makanan seperti "beras", "ayam", "bayam", dll. Sistem akan menampilkan data gizi yang relevan dari database yang tersedia.
 
-Informasi lain bila tersedia (serat, vitamin, zat besi)
+### 🧮 2. Kalkulasi Gizi Otomatis
+   Setelah memilih bahan pangan, pengguna bisa memasukkan jumlah berat (gram) dari makanan tersebut. Aplikasi akan menghitung total kandungan energi (kalori), protein, lemak, karbohidrat, dan zat gizi mikro (jika tersedia).
 
-3. 📊 Tabel Komposisi Pangan
-Data ditampilkan dalam format tabel yang rapi dan mudah dianalisis.
+### 🗂️ 3. Database Pangan Terstruktur
+   Informasi nutrisi didasarkan pada **data pangan lokal dan/atau internasional**, seperti Tabel Komposisi Pangan Indonesia (TKPI). Data tersaji dalam bentuk tabel yang mudah dipahami dan dapat digunakan untuk keperluan akademis.
 
-4. 🗂️ Basis Data Terverifikasi
-Menggunakan referensi dari Tabel Komposisi Pangan Indonesia (TKPI) dan/atau sumber data resmi lainnya.
+### 📊 4. Perbandingan dan Rekomendasi
+   Aplikasi memungkinkan pengguna membandingkan beberapa bahan pangan berdasarkan nilai gizinya. Berguna untuk merancang substitusi makanan yang lebih bergizi.
 
-⚙️ Fungsi Aplikasi dalam Kehidupan Sehari-hari
-Sebagai alat bantu edukasi gizi di sekolah, universitas, atau pelatihan masyarakat.
+---
 
-Untuk menyusun menu bergizi seimbang dengan pilihan bahan yang tepat.
+## ⚙️ Fungsi Utama Aplikasi
 
-Digunakan oleh tenaga gizi dalam perhitungan diet atau intervensi pangan.
+- **Edukasi Gizi**: Cocok untuk siswa, mahasiswa, guru, dan masyarakat umum yang ingin belajar tentang nilai gizi makanan.
+- **Perencanaan Menu**: Membantu ahli gizi atau rumah tangga dalam menyusun menu makanan seimbang.
+- **Evaluasi Konsumsi Pangan**: Bisa digunakan untuk menilai nilai gizi dari makanan yang dikonsumsi harian atau mingguan.
 
-Sebagai referensi cepat saat ingin mengecek kandungan nutrisi dari makanan.
+---
 
-🌱 Manfaat Penggunaan
-✅ Edukatif dan mudah digunakan oleh siapa saja
+## 🌱 Manfaat Penggunaan
 
-✅ Tidak membutuhkan instalasi—cukup akses lewat web
+- ✅ Akses informasi gizi cepat dan mudah  
+- ✅ Dapat digunakan dalam pelatihan, workshop, dan pengajaran gizi  
+- ✅ Gratis dan berbasis web – tidak butuh instalasi  
+- ✅ Mendukung transparansi dan akurasi data dalam dunia gizi  
+- ✅ Membantu menyusun program intervensi gizi berbasis data
 
-✅ Mengurangi ketergantungan pada dokumen cetak atau kalkulasi manual
+---
 
-✅ Mendukung program intervensi gizi berbasis data dan bukti
+## ⚠️ Catatan Pengembangan
 
-⚠️ Catatan Pengembangan
-Aplikasi ini masih dalam tahap pengembangan awal.
-Beberapa fitur belum sepenuhnya tersedia, dan antarmuka pengguna masih bersifat dasar.
-Rencana ke depan mencakup:
+> **Aplikasi ini masih dalam tahap pengembangan.**  
+> Beberapa fitur dan tampilan mungkin belum lengkap atau masih bersifat prototipe.  
+> Tim pengembang berencana melakukan **pengembangan lanjutan**, termasuk:
+> - Penambahan lebih banyak data bahan pangan  
+> - Visualisasi nilai gizi dalam bentuk grafik  
+> - Fitur ekspor data hasil kalkulasi  
+> - Antarmuka pengguna yang lebih intuitif dan interaktif
 
-Penambahan lebih banyak data bahan pangan
-
-Visualisasi gizi dalam bentuk grafik
-
-Fitur ekspor data hasil kalkulasi
-
-Integrasi menu diet otomatis
+---
 """)
