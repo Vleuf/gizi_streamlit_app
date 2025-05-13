@@ -7,7 +7,10 @@ st.set_page_config(page_title="Perhitungan Nilai GIZI", layout="wide")
 # Fungsi ganti halaman
 def set_page(page_name):
     st.session_state.page = page_name
-    # Tidak ada efek st.snow atau st.balloons di sini
+    if page_name == "perhitungan":
+        st.balloons()  # 🎈 Efek balon saat pindah ke halaman perhitungan
+    elif page_name == "beranda":
+        st.balloons()  # 🎈 Efek balon saat kembali ke beranda
 
 # Load data
 @st.cache_data
