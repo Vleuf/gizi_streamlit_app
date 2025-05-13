@@ -29,55 +29,71 @@ st.markdown("""
 # ======== Teks Asli Perkenalan ========
 st.title("📘 Selamat Datang di Aplikasi Perhitungan Gizi")
 st.markdown("""
-🧬 Apa itu GiziApp for Humanity?
-GiziApp for Humanity adalah aplikasi web berbasis Streamlit yang berfungsi untuk menghitung kandungan gizi dari berbagai bahan pangan, menggunakan basis data gizi yang terstruktur. Aplikasi ini dikembangkan dengan misi kemanusiaan untuk meningkatkan literasi dan kesadaran gizi melalui teknologi yang mudah diakses.
-
-Berbeda dengan kalkulator kebutuhan energi yang didasarkan pada profil individu (usia, berat badan, aktivitas, dll.), aplikasi ini fokus pada analisis kandungan gizi bahan pangan — seperti beras, telur, daging, sayuran, dan lainnya.
+🧮 Aplikasi Perhitungan Gizi dan Database Pangan
+Aplikasi Perhitungan Gizi dan Database Pangan adalah aplikasi berbasis web yang dirancang untuk membantu pengguna menghitung kandungan gizi dari berbagai bahan pangan menggunakan basis data gizi yang tersusun secara ilmiah. Aplikasi ini tidak ditujukan untuk menghitung kebutuhan energi berdasarkan usia atau aktivitas fisik, melainkan fokus pada analisis nutrisi makanan dari bahan mentah atau olahan secara kuantitatif.
 
 🎯 Tujuan Pengembangan
-Tujuan utama dari GiziApp for Humanity antara lain:
+Aplikasi ini dikembangkan untuk menjawab beberapa kebutuhan berikut:
 
-Mempermudah akses terhadap data kandungan gizi bahan pangan
+Menyediakan akses cepat dan mudah ke informasi kandungan gizi dari bahan pangan.
 
-Mendukung edukasi gizi di kalangan masyarakat, pelajar, dan profesional kesehatan
+Mendukung proses edukasi gizi berbasis data di berbagai level—individu, akademik, dan institusional.
 
-Membantu perencanaan menu makanan berbasis data
+Membantu tenaga gizi, peneliti, guru, dan masyarakat umum dalam perencanaan menu sehat.
 
-Mendorong kesadaran konsumsi makanan bergizi dan seimbang
+Mengintegrasikan teknologi dalam pemantauan dan pemilihan pangan yang lebih bijak.
 
-🔍 Fitur-Fitur Utama
-1. Pencarian Bahan Pangan
-Pengguna dapat mencari berbagai jenis bahan pangan dari database untuk mengetahui kandungan gizinya.
+🧩 Fitur-Fitur Utama
+1. 🔍 Pencarian Bahan Pangan
+Pengguna dapat mencari berbagai jenis bahan pangan, seperti sayur, buah, daging, dan lainnya, dari daftar database yang tersedia.
 
-2. Kalkulasi Otomatis
-Pengguna bisa memasukkan berat bahan makanan (dalam gram), dan aplikasi akan menghitung nilai kalori, protein, karbohidrat, dan lemak berdasarkan data yang tersedia.
+2. 🧮 Perhitungan Kandungan Gizi Otomatis
+Setelah memilih bahan pangan, pengguna cukup memasukkan jumlah dalam gram, dan aplikasi akan menampilkan:
 
-3. Tampilan Tabel Data Gizi
-Nilai gizi ditampilkan dalam format tabel yang jelas dan mudah dipahami.
+Kalori (kkal)
 
-4. Sumber Data Terpercaya
-Menggunakan data dari sumber seperti Tabel Komposisi Pangan Indonesia (TKPI) dan sumber internasional lain (jika tersedia).
+Protein (gram)
 
-⚙️ Fungsi Aplikasi
-Membantu merancang menu seimbang berdasarkan data nyata.
+Lemak (gram)
 
-Digunakan sebagai alat bantu dalam edukasi gizi dan pelatihan masyarakat.
+Karbohidrat (gram)
 
-Mendukung pengambilan keputusan berbasis data di bidang gizi dan ketahanan pangan.
+Informasi lain bila tersedia (serat, vitamin, zat besi)
 
-🌱 Manfaat
-Akses mudah, cepat, dan tanpa biaya
+3. 📊 Tabel Komposisi Pangan
+Data ditampilkan dalam format tabel yang rapi dan mudah dianalisis.
 
-Edukatif untuk masyarakat umum dan tenaga profesional
+4. 🗂️ Basis Data Terverifikasi
+Menggunakan referensi dari Tabel Komposisi Pangan Indonesia (TKPI) dan/atau sumber data resmi lainnya.
 
-Meningkatkan kesadaran gizi harian berbasis bukti
+⚙️ Fungsi Aplikasi dalam Kehidupan Sehari-hari
+Sebagai alat bantu edukasi gizi di sekolah, universitas, atau pelatihan masyarakat.
 
-Membantu mengganti atau membandingkan bahan pangan secara objektif
+Untuk menyusun menu bergizi seimbang dengan pilihan bahan yang tepat.
 
-⚠️ Catatan Penting
-GiziApp for Humanity saat ini masih dalam tahap pengembangan.
-Beberapa fitur dan tampilan mungkin belum lengkap atau masih bersifat prototipe.
-Tim pengembang berencana melakukan pengembangan lanjutan, termasuk penambahan fitur seperti ekspor data, integrasi dengan grafik, serta perbaikan antarmuka pengguna agar lebih ramah dan intuitif.
+Digunakan oleh tenaga gizi dalam perhitungan diet atau intervensi pangan.
 
+Sebagai referensi cepat saat ingin mengecek kandungan nutrisi dari makanan.
 
+🌱 Manfaat Penggunaan
+✅ Edukatif dan mudah digunakan oleh siapa saja
+
+✅ Tidak membutuhkan instalasi—cukup akses lewat web
+
+✅ Mengurangi ketergantungan pada dokumen cetak atau kalkulasi manual
+
+✅ Mendukung program intervensi gizi berbasis data dan bukti
+
+⚠️ Catatan Pengembangan
+Aplikasi ini masih dalam tahap pengembangan awal.
+Beberapa fitur belum sepenuhnya tersedia, dan antarmuka pengguna masih bersifat dasar.
+Rencana ke depan mencakup:
+
+Penambahan lebih banyak data bahan pangan
+
+Visualisasi gizi dalam bentuk grafik
+
+Fitur ekspor data hasil kalkulasi
+
+Integrasi menu diet otomatis
 """)
