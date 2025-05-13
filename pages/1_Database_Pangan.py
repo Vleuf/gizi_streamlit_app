@@ -59,6 +59,11 @@ if st.session_state.current_page == "beranda":
     Halaman ini menyediakan informasi mengenai berbagai bahan pangan, 
     termasuk kandungan gizi dan deskripsi lengkapnya. 
     Anda dapat memilih bahan pangan dari daftar untuk melihat penjelasan detail mengenai manfaat dan kandungan gizinya.
+    
+    Di bawah ini, Anda dapat memilih bahan pangan untuk melihat penjelasan lengkap mengenai manfaat dan nilai gizinya. 
+    Informasi ini sangat berguna untuk merancang pola makan yang sehat dan seimbang, baik untuk kebutuhan pribadi maupun keluarga Anda.
+
+    Silakan tekan pada daftar berikut untuk mulai eksplorasi 👇
     """)
     st.button("📑 Buka Database Bahan Pangan", on_click=go_to_database)
 # ==================== HALAMAN DATABASE ====================
