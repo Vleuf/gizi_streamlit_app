@@ -54,7 +54,7 @@ Aplikasi Perhitungan Gizi dan Database Pangan ini dikembangkan oleh tim yang ber
 ---
 
 ## 🚀 Pengembangan Lanjutan
-Aplikasi ini masih dalam tahap pengembangan dan setiap pengembang baru dipersilakan untuk berkolaborasi dalam peningkatan aplikasi. Jika Anda tertarik untuk berkontribusi, Anda dapat menghubungi kami di [email@example.com] atau membuka masalah (issue) di repositori GitHub kami.
+Aplikasi ini masih dalam tahap pengembangan dan setiap pengembang baru dipersilakan untuk berkolaborasi dalam peningkatan aplikasi.
 
 ---
 
