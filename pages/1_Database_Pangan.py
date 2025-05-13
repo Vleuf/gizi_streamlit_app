@@ -13,6 +13,8 @@ if "quiz_submitted" not in st.session_state:
     st.session_state.quiz_submitted = False
 if "question_index" not in st.session_state:
     st.session_state.question_index = 0
+if "user_answers" not in st.session_state:
+    st.session_state.user_answers = []
 
 # Fungsi navigasi
 def go_to_database():
@@ -24,7 +26,7 @@ def go_to_quiz():
 def go_to_home():
     st.session_state.current_page = "beranda"
 
-# CSS Styling
+# CSS Styling for text color white and other enhancements
 st.markdown("""
     <style>
     .stApp {
@@ -55,7 +57,7 @@ st.markdown("""
         box-shadow: none !important;
     }
 
-    label, .css-1cpxqw2, .css-1y4p8pa {
+    label, .css-1cpxqw2, .css-1y4p8pa, .quiz-options label {
         color: white !important;
     }
 
@@ -134,11 +136,16 @@ elif st.session_state.current_page == "quiz":
     question = questions[st.session_state.question_index]
     
     st.subheader(f"📝 {question['question']}")
-    options = st.radio("Pilih jawaban:", question["options"], key=f"q{st.session_state.question_index}")
-    
+    options = st.radio("Pilih jawaban:", question["options"], key=f"q{st.session_state.question_index}", horizontal=True)
+
+    # Menyimpan jawaban pengguna
+    if options:
+        st.session_state.user_answers.append(options)
+
     if st.button("✅ Lanjutkan"):
         if options == question["answer"]:
             st.session_state.quiz_score += 1
+        
         # Move to the next question
         if st.session_state.question_index < len(questions) - 1:
             st.session_state.question_index += 1
@@ -156,4 +163,5 @@ elif st.session_state.current_page == "quiz":
         st.session_state.quiz_score = 0
         st.session_state.quiz_submitted = False
         st.session_state.question_index = 0
+        st.session_state.user_answers = []
         go_to_quiz()
