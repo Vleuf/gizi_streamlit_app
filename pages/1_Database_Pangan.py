@@ -77,6 +77,11 @@ st.markdown("""
     .stSelectbox div[role="combobox"] > div {
         color: white !important;
     }
+    /* Ubah warna teks opsi radio button */
+div[role="radiogroup"] label {
+    color: white !important;
+}
+
     </style>
 """, unsafe_allow_html=True)
 
