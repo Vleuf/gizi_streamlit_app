@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
 
-# ========================== Konfigurasi ==========================
+# Konfigurasi halaman
 st.set_page_config(page_title="GiziApp for Humanity", layout="wide")
 
-# Inisialisasi state
+# Inisialisasi session state
 if "current_page" not in st.session_state:
     st.session_state.current_page = "beranda"
 if "quiz_score" not in st.session_state:
@@ -16,19 +16,16 @@ if "question_index" not in st.session_state:
 if "user_answers" not in st.session_state:
     st.session_state.user_answers = []
 
-# ========================== Navigasi ==========================
-def go_to_home():
-    st.session_state.current_page = "beranda"
-
+# Navigasi
 def go_to_database():
     st.session_state.current_page = "database"
 
 def go_to_quiz():
-    st.session_state.quiz_score = 0
-    st.session_state.quiz_submitted = False
-    st.session_state.question_index = 0
-    st.session_state.user_answers = []
+    reset_quiz()
     st.session_state.current_page = "quiz"
+
+def go_to_home():
+    st.session_state.current_page = "beranda"
 
 def reset_quiz():
     st.session_state.quiz_score = 0
@@ -36,43 +33,60 @@ def reset_quiz():
     st.session_state.question_index = 0
     st.session_state.user_answers = []
 
-# ========================== CSS Styling ==========================
+# Styling
 st.markdown("""
     <style>
     .stApp {
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
                     url('https://images.pexels.com/photos/5463890/pexels-photo-5463890.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
         background-size: cover;
         background-position: center;
-        background-repeat: no-repeat;
         color: white !important;
     }
-    label, .css-1cpxqw2, .css-1y4p8pa, .css-1j6g3l7, .css-1v0mbdj {
+
+    label, .css-1cpxqw2, .css-1y4p8pa, .css-1j6g3l7, .css-qrbaxs {
         color: white !important;
     }
-    div[role="radiogroup"] label {
-        color: white !important;
-    }
+
     .stSelectbox div[role="combobox"] > div {
         color: white !important;
+    }
+
+    .css-1v0mbdj span {
+        color: white !important;
+    }
+
+    div[role="radiogroup"] > label {
+        color: white !important;
+    }
+
+    .stButton > button {
+        background-color: rgba(255,255,255,0.1);
+        color: white;
+        border: 1px solid white;
+    }
+
+    .stButton > button:hover {
+        background-color: rgba(255,255,255,0.3);
+        color: black;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# ========================== Halaman Beranda ==========================
+# ================== HALAMAN BERANDA ==================
 if st.session_state.current_page == "beranda":
     st.title("📘 Selamat Datang di GiziApp for Humanity")
     st.markdown("""
-    Aplikasi ini memberikan informasi tentang bahan pangan dan kandungan gizinya serta menyediakan kuis tentang gizi. 
-    Anda dapat mengeksplorasi database bahan pangan atau menguji pengetahuan Anda melalui kuis.
+    Aplikasi ini memberikan informasi tentang bahan pangan dan kandungan gizinya serta menyediakan kuis interaktif untuk menguji pengetahuan Anda.
     """)
+
     col1, col2 = st.columns(2)
     with col1:
         st.button("📑 Buka Database Bahan Pangan", on_click=go_to_database)
     with col2:
         st.button("🎯 Mulai Kuis Gizi", on_click=go_to_quiz)
 
-# ========================== Halaman Database ==========================
+# ================== HALAMAN DATABASE ==================
 elif st.session_state.current_page == "database":
     st.title("📋 Database Bahan Pangan")
     st.button("🔙 Kembali ke Beranda", on_click=go_to_home)
@@ -81,17 +95,18 @@ elif st.session_state.current_page == "database":
         df = pd.read_csv("deskripsi_dengan_pengertian.csv")
         bahan_list = [""] + df['Bahan'].dropna().unique().tolist()
         menu = st.selectbox("Pilih bahan pangan:", bahan_list)
+
         if menu:
             deskripsi = df[df['Bahan'] == menu]['Deskripsi Lengkap'].values[0]
             st.subheader(f"📝 {menu}")
             st.markdown(deskripsi)
     except FileNotFoundError:
-        st.error("❌ File CSV tidak ditemukan. Pastikan file `deskripsi_dengan_pengertian.csv` ada di folder ini.")
+        st.error("❌ File tidak ditemukan. Pastikan `deskripsi_dengan_pengertian.csv` tersedia.")
 
-# ========================== Halaman Kuis ==========================
+# ================== HALAMAN QUIZ ==================
 elif st.session_state.current_page == "quiz":
+    st.title("🎯 Kuis Gizi & Bahan Pangan")
     st.button("🔙 Kembali ke Beranda", on_click=go_to_home)
-    st.title("🎯 Kuis Gizi & Pengetahuan Pangan")
 
     questions = [
         {"question": "1. Apa kandungan gizi utama dari Alpukat?", "options": ["Lemak", "Vitamin C", "Karbohidrat"], "answer": "Lemak"},
@@ -105,35 +120,32 @@ elif st.session_state.current_page == "quiz":
         {"question": "9. Apa kandungan gizi utama dari Hati Sapi?", "options": ["Zat Besi", "Lemak", "Serat"], "answer": "Zat Besi"},
         {"question": "10. Apa kandungan gizi utama dari Ubi Jalar?", "options": ["Karbohidrat", "Vitamin C", "Lemak"], "answer": "Karbohidrat"},
         {"question": "11. Tempe dibuat melalui proses apa?", "options": ["Fermentasi", "Perebusan", "Pengeringan"], "answer": "Fermentasi"},
-        {"question": "12. Abalone adalah jenis makanan laut yang termasuk dalam kelompok apa?", "options": ["Kerang-kerangan", "Ikan", "Rumput laut"], "answer": "Kerang-kerangan"},
-        {"question": "13. Tepung terigu biasanya berasal dari bahan apa?", "options": ["Gandum", "Jagung", "Kedelai"], "answer": "Gandum"},
-        {"question": "14. Minyak zaitun diekstrak dari buah zaitun dan dikenal karena?", "options": ["Lemak tak jenuh yang sehat", "Serat tinggi", "Kadar protein tinggi"], "answer": "Lemak tak jenuh yang sehat"},
-        {"question": "15. Anggur mengandung antioksidan penting bernama apa?", "options": ["Resveratrol", "Omega-3", "Laktosa"], "answer": "Resveratrol"},
+        {"question": "12. Abalone termasuk kelompok apa?", "options": ["Kerang-kerangan", "Ikan", "Rumput laut"], "answer": "Kerang-kerangan"},
+        {"question": "13. Tepung terigu berasal dari apa?", "options": ["Gandum", "Jagung", "Kedelai"], "answer": "Gandum"},
+        {"question": "14. Minyak zaitun dikenal karena?", "options": ["Lemak tak jenuh yang sehat", "Serat tinggi", "Kadar protein tinggi"], "answer": "Lemak tak jenuh yang sehat"},
+        {"question": "15. Anggur mengandung antioksidan bernama?", "options": ["Resveratrol", "Omega-3", "Laktosa"], "answer": "Resveratrol"},
     ]
 
     if not st.session_state.quiz_submitted:
-        idx = st.session_state.question_index
-        question = questions[idx]
-        st.subheader(question["question"])
-        user_choice = st.radio("Pilih jawaban:", question["options"], key=f"q_{idx}")
+        q = questions[st.session_state.question_index]
+        st.subheader(f"❓ {q['question']}")
+        selected = st.radio("Pilih jawaban Anda:", q["options"], key=f"q_{st.session_state.question_index}", index=None)
 
         if st.button("✅ Lanjutkan"):
-            if idx >= len(st.session_state.user_answers):
-                st.session_state.user_answers.append(user_choice)
-                if user_choice == question["answer"]:
+            if selected:
+                st.session_state.user_answers.append(selected)
+                if selected == q["answer"]:
                     st.session_state.quiz_score += 1
 
-            if idx + 1 < len(questions):
-                st.session_state.question_index += 1
+                if st.session_state.question_index < len(questions) - 1:
+                    st.session_state.question_index += 1
+                else:
+                    st.session_state.quiz_submitted = True
             else:
-                st.session_state.quiz_submitted = True
+                st.warning("Silakan pilih jawaban terlebih dahulu.")
 
-    if st.session_state.quiz_submitted:
-        st.success(f"🎯 Skor Anda: {st.session_state.quiz_score} / {len(questions)}")
+    else:
+        st.success(f"🎉 Skor Anda: {st.session_state.quiz_score} / {len(questions)}")
         if st.session_state.quiz_score == len(questions):
             st.balloons()
-        col1, col2 = st.columns(2)
-        with col1:
-            st.button("🔁 Coba Lagi", on_click=go_to_quiz)
-        with col2:
-            st.button("🏠 Kembali ke Beranda", on_click=go_to_home)
+        st.button("🔁 Coba Lagi", on_click=go_to_quiz)
