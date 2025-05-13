@@ -115,9 +115,8 @@ elif st.session_state.page == "perhitungan":
     # Tombol hitung dengan spinner loading
     if st.button("Hitung Total Gizi"):
         with st.spinner('Menghitung total nilai gizi...'):
-            time.sleep(2)  # Simulasi proses perhitungan yang memakan waktu
-
-            st.snow()  # 🎉 Efek snow ditampilkan saat tombol ditekan
+            time.sleep(2)
+            st.snow()
 
             total = {
                 "Kalori": 0, "Protein": 0, "Lemak": 0, "Karbohidrat": 0,
@@ -161,3 +160,48 @@ elif st.session_state.page == "perhitungan":
             if hasil_detail:
                 st.subheader("Detail Per Bahan:")
                 st.dataframe(pd.DataFrame(hasil_detail))
+
+            # --- Saran berdasarkan hasil total ---
+            st.subheader("\U0001F4A1 Saran Nutrisi dan Penjelasan:")
+
+            saran = []
+            penjelasan = []
+
+            if total["Kalori"] < 1500:
+                saran.append("- Tambahkan makanan sumber energi seperti nasi, mie, roti gandum, ubi jalar, pisang, alpukat, atau granola.")
+                penjelasan.append("Kekurangan kalori menyebabkan tubuh tidak memiliki cukup energi untuk menjalankan aktivitas harian. Gejala termasuk kelelahan, berat badan turun drastis, konsentrasi menurun, dan bisa mempengaruhi keseimbangan hormon tubuh.")
+
+            if total["Protein"] < 50:
+                saran.append("- Tambahkan telur, dada ayam, tempe, tahu, ikan, daging sapi tanpa lemak, susu, yogurt, atau edamame.")
+                penjelasan.append("Kekurangan protein bisa menyebabkan kehilangan massa otot, mudah sakit, penyembuhan luka lambat, rambut rontok, dan gangguan pertumbuhan terutama pada anak-anak.")
+
+            if total["Lemak"] < 40:
+                saran.append("- Tambahkan kacang almond, kenari, minyak zaitun, biji chia, ikan salmon, atau santan.")
+                penjelasan.append("Lemak penting untuk penyerapan vitamin larut lemak (A, D, E, K), fungsi otak, dan produksi hormon. Kekurangan lemak dapat menyebabkan kulit kering, ketidakseimbangan hormon, dan gangguan pada sistem saraf.")
+
+            if total["Serat"] < 20:
+                saran.append("- Tambahkan sayur seperti brokoli, bayam, wortel, serta buah seperti apel, pir, pepaya, dan biji-bijian utuh.")
+                penjelasan.append("Serat membantu pencernaan, mengontrol gula darah, dan menurunkan kolesterol. Kekurangannya bisa menyebabkan sembelit, peningkatan risiko penyakit jantung, dan gangguan metabolisme.")
+
+            if total["Kalsium"] < 800:
+                saran.append("- Tambahkan susu, yogurt, keju, brokoli, kale, tahu, tempe, ikan sarden atau salmon bertulang.")
+                penjelasan.append("Kalsium penting untuk tulang dan gigi kuat, serta fungsi otot dan saraf. Kekurangan kalsium dapat menyebabkan osteoporosis, kram otot, dan gangguan detak jantung.")
+
+            if total["Zat Besi"] < 14:
+                saran.append("- Tambahkan hati ayam, daging merah, bayam, kacang merah, lentil, telur, atau sereal yang difortifikasi zat besi.")
+                penjelasan.append("Zat besi penting untuk membentuk hemoglobin. Kekurangannya menyebabkan anemia yang ditandai dengan lemas, pucat, detak jantung cepat, dan sesak napas.")
+
+            if total["Vitamin C"] < 60:
+                saran.append("- Tambahkan jeruk, kiwi, stroberi, mangga, jambu biji, paprika merah, atau tomat.")
+                penjelasan.append("Vitamin C penting untuk sistem imun, penyembuhan luka, dan penyerapan zat besi. Kekurangannya menyebabkan sariawan, gusi berdarah, dan skorbut (pada kasus parah).")
+
+            if saran:
+                st.markdown("### ✅ Saran:")
+                for item in saran:
+                    st.markdown(item)
+
+                st.markdown("### ℹ️ Penjelasan Dampak Kekurangan:")
+                for item in penjelasan:
+                    st.markdown(f"- {item}")
+            else:
+                st.success("\U0001F389 Asupan gizi Anda sudah mencukupi dari bahan yang dipilih.")
