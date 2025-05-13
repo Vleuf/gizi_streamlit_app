@@ -7,8 +7,7 @@ st.set_page_config(page_title="Perhitungan Nilai GIZI", layout="wide")
 # Fungsi ganti halaman
 def set_page(page_name):
     st.session_state.page = page_name
-    if page_name == "perhitungan":
-        st.snow()  # Efek confetti saat berpindah halaman
+    # Tidak ada efek st.snow atau st.balloons di sini
 
 # Load data
 @st.cache_data
@@ -111,6 +110,8 @@ elif st.session_state.page == "perhitungan":
 
     # Tombol hitung
     if st.button("Hitung Total Gizi"):
+        st.snow()  # 🎉 Efek snow ditampilkan saat tombol ditekan
+
         total = {
             "Kalori": 0, "Protein": 0, "Lemak": 0, "Karbohidrat": 0,
             "Serat": 0, "Kalsium": 0, "Zat Besi": 0, "Vitamin C": 0
@@ -144,8 +145,6 @@ elif st.session_state.page == "perhitungan":
                     "Zat Besi": row["Zat Besi"] * faktor,
                     "Vitamin C": row["Vitamin C"] * faktor,
                 })
-
-        st.balloons()  # Efek balon saat berhasil menghitung
 
         st.subheader("Total Nilai Gizi:")
         for k, v in total.items():
