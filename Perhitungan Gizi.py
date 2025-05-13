@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Konfigurasi
-st.set_page_config(page_title="Perhitungan Nilai Gizi", layout="wide")
+st.set_page_config(page_title="Perhitungan Nilai GIZI", layout="wide")
 
 # Fungsi ganti halaman
 def set_page(page_name):
@@ -64,7 +64,7 @@ st.markdown("""
 
 # ===================== BERANDA =====================
 if st.session_state.page == "beranda":
-    st.title("\U0001F4D8 Selamat Datang di Aplikasi Perhitungan Gizi")
+    st.title("\U0001F4D8 Selamat Datang di Halaman Perhitungan Gizi")
     st.markdown("""
     Aplikasi ini membantu Anda menghitung total nilai gizi dari berbagai bahan pangan berdasarkan berat (gram) yang dimasukkan.
 
