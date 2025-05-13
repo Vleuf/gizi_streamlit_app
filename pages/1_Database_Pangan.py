@@ -11,6 +11,7 @@ if "current_page" not in st.session_state:
 # Fungsi navigasi
 def go_to_database():
     st.session_state.current_page = "database"
+    st.balloons()  # 🎈 Efek balon saat buka database
 
 def go_to_home():
     st.session_state.current_page = "beranda"
@@ -66,6 +67,7 @@ if st.session_state.current_page == "beranda":
     Silakan tekan pada daftar berikut untuk mulai eksplorasi 👇
     """)
     st.button("📑 Buka Database Bahan Pangan", on_click=go_to_database)
+
 # ==================== HALAMAN DATABASE ====================
 elif st.session_state.current_page == "database":
     st.title("📋 Database Bahan Pangan")
