@@ -38,21 +38,16 @@ Aplikasi Perhitungan Gizi dan Database Pangan ini dikembangkan oleh tim yang ber
 
 ## 🌟 Tim Pengembang Utama
 
-1. **[Nama Pengembang 1]** - _Frontend Developer_
-   - Bertanggung jawab atas antarmuka pengguna (UI) dan desain aplikasi menggunakan Streamlit dan CSS.
+1. **[Adinda Kayla Siswanto]** - _2420564_
+   
+2. **[Dini Dwi Fayanti]** - _2420590_
+   
+3. **[Muhamad Rafid Mudawa]** - _2420623_
 
-2. **[Nama Pengembang 2]** - _Backend Developer_
-   - Mengelola integrasi dan pengolahan data menggunakan Pandas dan memastikan aplikasi berjalan dengan baik.
-
-3. **[Nama Pengembang 3]** - _Data Scientist_
-   - Menganalisis dan memverifikasi data gizi yang digunakan dalam aplikasi serta melakukan pembaruan dan perluasan database.
-
-4. **[Nama Kontributor 1]** - _Pengembang Fitur Perbandingan_
-   - Berkontribusi dalam pengembangan fitur perbandingan bahan pangan berdasarkan nilai gizi.
-
-5. **[Nama Kontributor 2]** - _Pengembang Visualisasi Data_
-   - Menambahkan fitur visualisasi grafis menggunakan Matplotlib untuk memperlihatkan perbandingan nilai gizi.
-
+4. **[Nessa Nur Azmmy]** - _2420636_
+  
+5. **[Widy Nur Oliviyanti]** - _2420679_
+   
 ---
 
 ## 🚀 Pengembangan Lanjutan
