@@ -77,6 +77,10 @@ st.markdown("""
     .stRadio input[type="radio"]:checked + label {
         color: white !important;
     }
+    .custom-selectbox label {
+        color: red !important;
+        font-weight: bold;
+    }
     </style>
 """, unsafe_allow_html=True)
 
