@@ -43,6 +43,17 @@ st.markdown("""
         color: white !important;
     }
 
+    /* Ubah warna label teks seperti 'Pilih bahan pangan' */
+    label, .css-1cpxqw2, .css-1y4p8pa, .css-1j6g3l7 {
+        color: white !important;
+    }
+
+    /* Untuk teks default pada dropdown selectbox */
+    .css-1d391kg, .css-1n76uvr, .css-14el2xx {
+        color: white !important;
+    }
+
+    /* Style tombol sekunder */
     button[kind="secondary"] {
         background-color: rgba(255, 255, 255, 0.1) !important;
         color: white !important;
@@ -62,24 +73,9 @@ st.markdown("""
         box-shadow: none !important;
     }
 
-    label, .css-1cpxqw2, .css-1y4p8pa {
+    /* Dropdown text color */
+    .stSelectbox div[role="combobox"] > div {
         color: white !important;
-    }
-
-    .stRadio > label {
-        color: white !important;
-    }
-
-    .stRadio > div > div > div > div {
-        color: white !important;
-    }
-
-    .stRadio input[type="radio"]:checked + label {
-        color: white !important;
-    }
-    .custom-selectbox label {
-        color: red !important;
-        font-weight: bold;
     }
     </style>
 """, unsafe_allow_html=True)
