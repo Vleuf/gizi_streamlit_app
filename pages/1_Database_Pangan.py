@@ -62,11 +62,19 @@ st.markdown("""
         box-shadow: none !important;
     }
 
-    label, .css-1cpxqw2, .css-1y4p8pa, .quiz-options label {
+    label, .css-1cpxqw2, .css-1y4p8pa {
         color: white !important;
     }
 
-    .quiz-options label {
+    .stRadio > label {
+        color: white !important;
+    }
+
+    .stRadio > div > div > div > div {
+        color: white !important;
+    }
+
+    .stRadio input[type="radio"]:checked + label {
         color: white !important;
     }
     </style>
