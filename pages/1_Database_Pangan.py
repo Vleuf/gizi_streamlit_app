@@ -21,7 +21,6 @@ def go_to_database():
     st.session_state.current_page = "database"
 
 def go_to_quiz():
-    # Reset quiz state before starting
     st.session_state.quiz_score = 0
     st.session_state.quiz_submitted = False
     st.session_state.question_index = 0
@@ -31,7 +30,14 @@ def go_to_quiz():
 def go_to_home():
     st.session_state.current_page = "beranda"
 
-# CSS Styling for text color white and other enhancements
+def reset_quiz():
+    st.session_state.quiz_score = 0
+    st.session_state.quiz_submitted = False
+    st.session_state.question_index = 0
+    st.session_state.user_answers = []
+    go_to_quiz()
+
+# CSS Styling
 st.markdown("""
     <style>
     .stApp {
@@ -43,17 +49,14 @@ st.markdown("""
         color: white !important;
     }
 
-    /* Ubah warna label teks seperti 'Pilih bahan pangan' */
     label, .css-1cpxqw2, .css-1y4p8pa, .css-1j6g3l7 {
         color: white !important;
     }
 
-    /* Untuk teks default pada dropdown selectbox */
     .css-1d391kg, .css-1n76uvr, .css-14el2xx {
         color: white !important;
     }
 
-    /* Style tombol sekunder */
     button[kind="secondary"] {
         background-color: rgba(255, 255, 255, 0.1) !important;
         color: white !important;
@@ -73,15 +76,14 @@ st.markdown("""
         box-shadow: none !important;
     }
 
-    /* Dropdown text color */
     .stSelectbox div[role="combobox"] > div {
         color: white !important;
     }
-    /* Ubah warna teks opsi radio button */
-div[role="radiogroup"] label {
-    color: white !important;
-}
 
+    /* WARNA PUTIH UNTUK OPSI RADIO BUTTON */
+    div[role="radiogroup"] label {
+        color: white !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -104,15 +106,11 @@ elif st.session_state.current_page == "database":
     st.title("📋 Database Bahan Pangan")
     st.button("🔙 Kembali ke Beranda", on_click=go_to_home)
 
-    # Baca data dari file CSV
     try:
         df = pd.read_csv("deskripsi_dengan_pengertian.csv")
         bahan_list = [""] + df['Bahan'].dropna().unique().tolist()
-
-        # Pilihan bahan pangan
         menu = st.selectbox("Pilih bahan pangan:", bahan_list)
 
-        # Tampilkan deskripsi jika tersedia
         if menu:
             deskripsi = df[df['Bahan'] == menu]['Deskripsi Lengkap'].values[0]
             st.subheader(f"📝 {menu}")
@@ -123,14 +121,11 @@ elif st.session_state.current_page == "database":
 
 # ==================== HALAMAN QUIZ ====================
 elif st.session_state.current_page == "quiz":
-    # Tombol untuk kembali ke beranda sebelum dan setelah quiz
     st.button("🔙 Kembali ke Beranda", on_click=go_to_home)
 
     st.title("📘 Kuis Gizi & Pengetahuan Bahan Pangan")
 
-    # Soal kuis (campuran)
     questions = [
-        # --- GIZI ---
         {"question": "1. Apa kandungan gizi utama dari Alpukat?", "options": ["Lemak", "Vitamin C", "Karbohidrat"], "answer": "Lemak"},
         {"question": "2. Apa kandungan gizi utama dari Tempe?", "options": ["Protein", "Serat", "Lemak"], "answer": "Protein"},
         {"question": "3. Apa kandungan gizi utama dari Jeruk?", "options": ["Vitamin C", "Protein", "Zat Besi"], "answer": "Vitamin C"},
@@ -141,8 +136,6 @@ elif st.session_state.current_page == "quiz":
         {"question": "8. Apa kandungan gizi utama dari Daging Ayam?", "options": ["Protein", "Karbohidrat", "Vitamin C"], "answer": "Protein"},
         {"question": "9. Apa kandungan gizi utama dari Hati Sapi?", "options": ["Zat Besi", "Lemak", "Serat"], "answer": "Zat Besi"},
         {"question": "10. Apa kandungan gizi utama dari Ubi Jalar?", "options": ["Karbohidrat", "Vitamin C", "Lemak"], "answer": "Karbohidrat"},
-    
-        # --- PENGERTIAN / DESKRIPSI ---
         {"question": "11. Tempe dibuat melalui proses apa?", "options": ["Fermentasi", "Perebusan", "Pengeringan"], "answer": "Fermentasi"},
         {"question": "12. Abalone adalah jenis makanan laut yang termasuk dalam kelompok apa?", "options": ["Kerang-kerangan", "Ikan", "Rumput laut"], "answer": "Kerang-kerangan"},
         {"question": "13. Tepung terigu biasanya berasal dari bahan apa?", "options": ["Gandum", "Jagung", "Kedelai"], "answer": "Gandum"},
@@ -150,36 +143,27 @@ elif st.session_state.current_page == "quiz":
         {"question": "15. Anggur mengandung antioksidan penting bernama apa?", "options": ["Resveratrol", "Omega-3", "Laktosa"], "answer": "Resveratrol"},
     ]
 
-    # Menampilkan soal satu per satu
-    question = questions[st.session_state.question_index]
-    
-    st.subheader(f"📝 {question['question']}")
-    options = st.radio("Pilih jawaban:", question["options"], key=f"q{st.session_state.question_index}", horizontal=True)
+    # Hanya tampilkan pertanyaan jika kuis belum selesai
+    if not st.session_state.quiz_submitted:
+        current_q = questions[st.session_state.question_index]
+        st.subheader(current_q["question"])
 
-    # Menyimpan jawaban pengguna
-    if options:
-        st.session_state.user_answers.append(options)
+        user_choice = st.radio("Pilih jawaban:", current_q["options"], key=st.session_state.question_index, horizontal=True)
 
-    if st.button("✅ Lanjutkan"):
-        if options == question["answer"]:
-            st.session_state.quiz_score += 1
-        
-        # Move to the next question
-        if st.session_state.question_index < len(questions) - 1:
-            st.session_state.question_index += 1
-        else:
-            st.session_state.quiz_submitted = True
+        if st.button("✅ Lanjutkan"):
+            # Simpan jawaban jika belum pernah disimpan
+            if len(st.session_state.user_answers) <= st.session_state.question_index:
+                st.session_state.user_answers.append(user_choice)
+                if user_choice == current_q["answer"]:
+                    st.session_state.quiz_score += 1
 
-    # Setelah selesai kuis
-    if st.session_state.quiz_submitted:
-        st.success(f"🎯 Skor Anda: {st.session_state.quiz_score} / 15")
-        if st.session_state.quiz_score == 15:
+                if st.session_state.question_index < len(questions) - 1:
+                    st.session_state.question_index += 1
+                else:
+                    st.session_state.quiz_submitted = True
+    else:
+        st.success(f"🎯 Skor Anda: {st.session_state.quiz_score} / {len(questions)}")
+        if st.session_state.quiz_score == len(questions):
             st.balloons()
-        st.button("🔁 Coba Lagi", on_click=lambda: reset_quiz())
-
-    def reset_quiz():
-        st.session_state.quiz_score = 0
-        st.session_state.quiz_submitted = False
-        st.session_state.question_index = 0
-        st.session_state.user_answers = []
-        go_to_quiz()
+        st.button("🔁 Coba Lagi", on_click=reset_quiz)
+        st.button("🔙 Kembali ke Beranda", on_click=go_to_home)
