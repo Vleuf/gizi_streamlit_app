@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import time
 
 # Konfigurasi
 st.set_page_config(page_title="Perhitungan Nilai GIZI", layout="wide")
@@ -111,49 +112,52 @@ elif st.session_state.page == "perhitungan":
                 gram = st.number_input("Jumlah (gram)", min_value=0.0, key=f"gram_{i}")
                 input_bahan_gram.append((bahan, gram))
 
-    # Tombol hitung
+    # Tombol hitung dengan spinner loading
     if st.button("Hitung Total Gizi"):
-        st.snow()  # 🎉 Efek snow ditampilkan saat tombol ditekan
+        with st.spinner('Menghitung total nilai gizi...'):
+            time.sleep(2)  # Simulasi proses perhitungan yang memakan waktu
 
-        total = {
-            "Kalori": 0, "Protein": 0, "Lemak": 0, "Karbohidrat": 0,
-            "Serat": 0, "Kalsium": 0, "Zat Besi": 0, "Vitamin C": 0
-        }
-        hasil_detail = []
+            st.snow()  # 🎉 Efek snow ditampilkan saat tombol ditekan
 
-        for bahan, gram in input_bahan_gram:
-            matching_rows = data[data["Bahan"] == bahan]
-            if not matching_rows.empty and gram > 0:
-                row = matching_rows.iloc[0]
-                faktor = gram / 100
+            total = {
+                "Kalori": 0, "Protein": 0, "Lemak": 0, "Karbohidrat": 0,
+                "Serat": 0, "Kalsium": 0, "Zat Besi": 0, "Vitamin C": 0
+            }
+            hasil_detail = []
 
-                total["Kalori"] += row["Kalori"] * faktor
-                total["Protein"] += row["Protein"] * faktor
-                total["Lemak"] += row["Lemak"] * faktor
-                total["Karbohidrat"] += row["Karbohidrat"] * faktor
-                total["Serat"] += row["Serat"] * faktor
-                total["Kalsium"] += row["Kalsium"] * faktor
-                total["Zat Besi"] += row["Zat Besi"] * faktor
-                total["Vitamin C"] += row["Vitamin C"] * faktor
+            for bahan, gram in input_bahan_gram:
+                matching_rows = data[data["Bahan"] == bahan]
+                if not matching_rows.empty and gram > 0:
+                    row = matching_rows.iloc[0]
+                    faktor = gram / 100
 
-                hasil_detail.append({
-                    "Bahan": bahan,
-                    "Gram": gram,
-                    "Kalori": row["Kalori"] * faktor,
-                    "Protein": row["Protein"] * faktor,
-                    "Lemak": row["Lemak"] * faktor,
-                    "Karbohidrat": row["Karbohidrat"] * faktor,
-                    "Serat": row["Serat"] * faktor,
-                    "Kalsium": row["Kalsium"] * faktor,
-                    "Zat Besi": row["Zat Besi"] * faktor,
-                    "Vitamin C": row["Vitamin C"] * faktor,
-                })
+                    total["Kalori"] += row["Kalori"] * faktor
+                    total["Protein"] += row["Protein"] * faktor
+                    total["Lemak"] += row["Lemak"] * faktor
+                    total["Karbohidrat"] += row["Karbohidrat"] * faktor
+                    total["Serat"] += row["Serat"] * faktor
+                    total["Kalsium"] += row["Kalsium"] * faktor
+                    total["Zat Besi"] += row["Zat Besi"] * faktor
+                    total["Vitamin C"] += row["Vitamin C"] * faktor
 
-        st.subheader("Total Nilai Gizi:")
-        for k, v in total.items():
-            satuan = "kkal" if k == "Kalori" else "g" if k in ["Protein", "Lemak", "Karbohidrat", "Serat"] else "mg"
-            st.write(f"*{k}:* {v:.2f} {satuan}")
+                    hasil_detail.append({
+                        "Bahan": bahan,
+                        "Gram": gram,
+                        "Kalori": row["Kalori"] * faktor,
+                        "Protein": row["Protein"] * faktor,
+                        "Lemak": row["Lemak"] * faktor,
+                        "Karbohidrat": row["Karbohidrat"] * faktor,
+                        "Serat": row["Serat"] * faktor,
+                        "Kalsium": row["Kalsium"] * faktor,
+                        "Zat Besi": row["Zat Besi"] * faktor,
+                        "Vitamin C": row["Vitamin C"] * faktor,
+                    })
 
-        if hasil_detail:
-            st.subheader("Detail Per Bahan:")
-            st.dataframe(pd.DataFrame(hasil_detail))
+            st.subheader("Total Nilai Gizi:")
+            for k, v in total.items():
+                satuan = "kkal" if k == "Kalori" else "g" if k in ["Protein", "Lemak", "Karbohidrat", "Serat"] else "mg"
+                st.write(f"*{k}:* {v:.2f} {satuan}")
+
+            if hasil_detail:
+                st.subheader("Detail Per Bahan:")
+                st.dataframe(pd.DataFrame(hasil_detail))
